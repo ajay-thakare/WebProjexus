@@ -30,7 +30,7 @@ export default function Home() {
 
         <div className="flex justify-center items-center relative md:mt-[-70px]">
           <Image
-            src={"/assets/preview.png"}
+            src={"/assets/resizecom_luke-chesser-JKUTrJ4vK00-unsplash.png"}
             alt="banner image"
             height={1200}
             width={1200}
