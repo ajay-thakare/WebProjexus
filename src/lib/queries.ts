@@ -126,7 +126,7 @@ export const saveActivityLogsNotification = async ({
 };
 
 export const createTeamUser = async (agencyId: string, user: User) => {
-  if (user.role === "AGECNY_OWNER") return null;
+  if (user.role === "AGENCY_OWNER") return null;
 
   const response = await db.user.create({
     data: { ...user },
