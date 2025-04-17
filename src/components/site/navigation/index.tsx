@@ -11,7 +11,7 @@ type Props = {
 
 const Navigation = ({ user }: Props) => {
   return (
-    <div className="p-4 flex items-center justify-between relative">
+    <div className="fixed top-0 right-0 left-0 flex justify-between p-4 items-center z-10">
       {/* left */}
       <aside className="flex items-center gap-2\">
         <Image
