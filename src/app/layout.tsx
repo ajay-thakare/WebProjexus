@@ -3,6 +3,7 @@ import { DM_Sans } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/providers/theme-provider";
 import { Toaster } from "react-hot-toast";
+import ModalProvider from "@/providers/modal-provider";
 
 const font = DM_Sans({ subsets: ["latin"] });
 
@@ -25,8 +26,10 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <Toaster position="top-center" reverseOrder={false} />
-          {children}
+          <ModalProvider>
+            <Toaster position="top-center" reverseOrder={false} />
+            {children}
+          </ModalProvider>
         </ThemeProvider>
       </body>
     </html>
