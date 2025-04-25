@@ -154,7 +154,7 @@ const MenuOptions = ({
                   placeholder="Search Accounts..."
                   className="outline-none "
                 />
-                <CommandList className="pb-16">
+                <CommandList className="pb-16 scrollbar-hide">
                   <CommandEmpty> No results found</CommandEmpty>
                   {(user?.role === "AGENCY_OWNER" ||
                     (user?.role === "AGENCY_ADMIN" && user?.Agency)) && (
