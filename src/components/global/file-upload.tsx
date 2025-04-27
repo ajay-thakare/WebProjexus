@@ -8,9 +8,15 @@ type Props = {
   apiEndpoint: "agencyLogo" | "avatar" | "subaccountLogo";
   onChange: (url?: string) => void;
   value?: string;
+  disabled?: boolean;
 };
 
-const FileUpload = ({ apiEndpoint, onChange, value }: Props) => {
+const FileUpload = ({
+  apiEndpoint,
+  onChange,
+  value,
+  disabled = false,
+}: Props) => {
   const type = value?.split(".").pop();
 
   if (value) {
@@ -40,7 +46,12 @@ const FileUpload = ({ apiEndpoint, onChange, value }: Props) => {
             </div>
           </div>
         )}
-        <Button onClick={() => onChange("")} variant="ghost" type="button">
+        <Button
+          onClick={() => onChange("")}
+          variant="ghost"
+          type="button"
+          disabled={disabled}
+        >
           <X className="size-4" />
           Remove Logo
         </Button>
@@ -59,6 +70,7 @@ const FileUpload = ({ apiEndpoint, onChange, value }: Props) => {
           alert(`ERROR! ${error.message}`);
           console.log(error);
         }}
+        disabled={disabled}
       />
     </div>
   );

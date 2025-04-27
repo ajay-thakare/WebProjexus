@@ -100,6 +100,7 @@ export default function AgencyDetails({ data }: Props) {
   }, [data]);
 
   const onValidSubmit = async (values: z.infer<typeof FormSchema>) => {
+    console.log("Values ::", values);
     try {
       let newUserData;
       let custId;
@@ -196,7 +197,6 @@ export default function AgencyDetails({ data }: Props) {
               className="space-y-4"
             >
               <FormField
-                disabled={isLoading}
                 control={form.control}
                 name="agencyLogo"
                 render={({ field }) => (
@@ -207,6 +207,7 @@ export default function AgencyDetails({ data }: Props) {
                         apiEndpoint="agencyLogo"
                         onChange={field.onChange}
                         value={field.value}
+                        disabled={isLoading}
                       />
                     </FormControl>
                     <FormMessage />
@@ -216,14 +217,17 @@ export default function AgencyDetails({ data }: Props) {
 
               <div className="flex md:flex-row gap-4">
                 <FormField
-                  disabled={isLoading}
                   control={form.control}
                   name="name"
                   render={({ field }) => (
                     <FormItem className="flex-1">
                       <FormLabel>Agency Name</FormLabel>
                       <FormControl>
-                        <Input placeholder="Your Agency Name" {...field} />
+                        <Input
+                          placeholder="Your Agency Name"
+                          disabled={isLoading}
+                          {...field}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -246,14 +250,17 @@ export default function AgencyDetails({ data }: Props) {
 
               <div className="flex md:flex-row gap-4">
                 <FormField
-                  disabled={isLoading}
                   control={form.control}
                   name="companyPhone"
                   render={({ field }) => (
                     <FormItem className="flex-1">
                       <FormLabel>Agency Phone Number</FormLabel>
                       <FormControl>
-                        <Input placeholder="Phone" {...field} />
+                        <Input
+                          placeholder="Phone"
+                          disabled={isLoading}
+                          {...field}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -289,14 +296,17 @@ export default function AgencyDetails({ data }: Props) {
               />
 
               <FormField
-                disabled={isLoading}
                 control={form.control}
                 name="address"
                 render={({ field }) => (
                   <FormItem className="flex-1">
                     <FormLabel>Address</FormLabel>
                     <FormControl>
-                      <Input placeholder="123 st..." {...field} />
+                      <Input
+                        placeholder="123 st..."
+                        disabled={isLoading}
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -305,42 +315,51 @@ export default function AgencyDetails({ data }: Props) {
 
               <div className="flex md:flex-row gap-4">
                 <FormField
-                  disabled={isLoading}
                   control={form.control}
                   name="city"
                   render={({ field }) => (
                     <FormItem className="flex-1">
                       <FormLabel>City</FormLabel>
                       <FormControl>
-                        <Input placeholder="City" {...field} />
+                        <Input
+                          placeholder="City"
+                          disabled={isLoading}
+                          {...field}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
                   )}
                 />
                 <FormField
-                  disabled={isLoading}
                   control={form.control}
                   name="state"
                   render={({ field }) => (
                     <FormItem className="flex-1">
                       <FormLabel>State</FormLabel>
                       <FormControl>
-                        <Input placeholder="State" {...field} />
+                        <Input
+                          placeholder="State"
+                          disabled={isLoading}
+                          {...field}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
                   )}
                 />
                 <FormField
-                  disabled={isLoading}
                   control={form.control}
                   name="zipCode"
                   render={({ field }) => (
                     <FormItem className="flex-1">
                       <FormLabel>Zipcode</FormLabel>
                       <FormControl>
-                        <Input placeholder="Zipcode" {...field} />
+                        <Input
+                          placeholder="Zipcode"
+                          disabled={isLoading}
+                          {...field}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -349,14 +368,17 @@ export default function AgencyDetails({ data }: Props) {
               </div>
 
               <FormField
-                disabled={isLoading}
                 control={form.control}
                 name="country"
                 render={({ field }) => (
                   <FormItem className="flex-1">
                     <FormLabel>Country</FormLabel>
                     <FormControl>
-                      <Input placeholder="Country" {...field} />
+                      <Input
+                        placeholder="Country"
+                        disabled={isLoading}
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>

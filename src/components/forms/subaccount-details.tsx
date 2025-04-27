@@ -135,7 +135,6 @@ const SubAccountDetails: React.FC<SubAccountDetailsProps> = ({
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
             <FormField
-              disabled={isLoading}
               control={form.control}
               name="subAccountLogo"
               render={({ field }) => (
@@ -146,6 +145,7 @@ const SubAccountDetails: React.FC<SubAccountDetailsProps> = ({
                       apiEndpoint="subaccountLogo"
                       value={field.value}
                       onChange={field.onChange}
+                      disabled={isLoading}
                     />
                   </FormControl>
                   <FormMessage />
@@ -154,7 +154,6 @@ const SubAccountDetails: React.FC<SubAccountDetailsProps> = ({
             />
             <div className="flex md:flex-row gap-4">
               <FormField
-                disabled={isLoading}
                 control={form.control}
                 name="name"
                 render={({ field }) => (
@@ -164,6 +163,7 @@ const SubAccountDetails: React.FC<SubAccountDetailsProps> = ({
                       <Input
                         required
                         placeholder="Your agency name"
+                        disabled={isLoading}
                         {...field}
                       />
                     </FormControl>
@@ -172,14 +172,17 @@ const SubAccountDetails: React.FC<SubAccountDetailsProps> = ({
                 )}
               />
               <FormField
-                disabled={isLoading}
                 control={form.control}
                 name="companyEmail"
                 render={({ field }) => (
                   <FormItem className="flex-1">
                     <FormLabel>Acount Email</FormLabel>
                     <FormControl>
-                      <Input placeholder="Email" {...field} />
+                      <Input
+                        placeholder="Email"
+                        disabled={isLoading}
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -188,14 +191,18 @@ const SubAccountDetails: React.FC<SubAccountDetailsProps> = ({
             </div>
             <div className="flex md:flex-row gap-4">
               <FormField
-                disabled={isLoading}
                 control={form.control}
                 name="companyPhone"
                 render={({ field }) => (
                   <FormItem className="flex-1">
                     <FormLabel>Acount Phone Number</FormLabel>
                     <FormControl>
-                      <Input placeholder="Phone" required {...field} />
+                      <Input
+                        placeholder="Phone"
+                        required
+                        disabled={isLoading}
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -204,14 +211,18 @@ const SubAccountDetails: React.FC<SubAccountDetailsProps> = ({
             </div>
 
             <FormField
-              disabled={isLoading}
               control={form.control}
               name="address"
               render={({ field }) => (
                 <FormItem className="flex-1">
                   <FormLabel>Address</FormLabel>
                   <FormControl>
-                    <Input required placeholder="123 st..." {...field} />
+                    <Input
+                      required
+                      placeholder="123 st..."
+                      disabled={isLoading}
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -219,42 +230,54 @@ const SubAccountDetails: React.FC<SubAccountDetailsProps> = ({
             />
             <div className="flex md:flex-row gap-4">
               <FormField
-                disabled={isLoading}
                 control={form.control}
                 name="city"
                 render={({ field }) => (
                   <FormItem className="flex-1">
                     <FormLabel>City</FormLabel>
                     <FormControl>
-                      <Input required placeholder="City" {...field} />
+                      <Input
+                        required
+                        placeholder="City"
+                        disabled={isLoading}
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
               <FormField
-                disabled={isLoading}
                 control={form.control}
                 name="state"
                 render={({ field }) => (
                   <FormItem className="flex-1">
                     <FormLabel>State</FormLabel>
                     <FormControl>
-                      <Input required placeholder="State" {...field} />
+                      <Input
+                        required
+                        placeholder="State"
+                        disabled={isLoading}
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
               <FormField
-                disabled={isLoading}
                 control={form.control}
                 name="zipCode"
                 render={({ field }) => (
                   <FormItem className="flex-1">
                     <FormLabel>Zipcode</FormLabel>
                     <FormControl>
-                      <Input required placeholder="Zipcode" {...field} />
+                      <Input
+                        required
+                        placeholder="Zipcode"
+                        disabled={isLoading}
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -262,14 +285,18 @@ const SubAccountDetails: React.FC<SubAccountDetailsProps> = ({
               />
             </div>
             <FormField
-              disabled={isLoading}
               control={form.control}
               name="country"
               render={({ field }) => (
                 <FormItem className="flex-1">
                   <FormLabel>Country</FormLabel>
                   <FormControl>
-                    <Input required placeholder="Country" {...field} />
+                    <Input
+                      required
+                      placeholder="Country"
+                      disabled={isLoading}
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
