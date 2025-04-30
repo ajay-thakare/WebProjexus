@@ -415,13 +415,31 @@ export default function AgencyDetails({ data }: Props) {
               )}
 
               <div className="flex justify-center">
-                <Button type="submit" disabled={isLoading}>
+                {/* <Button type="submit" disabled={isLoading}>
                   {isLoading ? (
                     <Loading />
                   ) : !data?.id ? (
                     "Create Your Agency"
                   ) : (
                     "Save Agency Information"
+                  )}
+                </Button> */}
+                <Button
+                  type="submit"
+                  disabled={isLoading || !form.formState.isDirty}
+                  // variant={!form.formState.isDirty ? "ghost" : "default"}
+                  className={
+                    !form.formState.isDirty ? "text-muted-foreground" : ""
+                  }
+                >
+                  {isLoading ? (
+                    <Loading />
+                  ) : !data?.id ? (
+                    "Create Your Agency"
+                  ) : form.formState.isDirty ? (
+                    "Save Agency Information"
+                  ) : (
+                    "No changes made"
                   )}
                 </Button>
               </div>
