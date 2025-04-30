@@ -75,8 +75,8 @@ const InfoBar = ({ notifications, role, className, subAccountId }: Props) => {
                   key={notification.id}
                   className="flex flex-col gap-y-2 mb-2 overflow-x-auto text-ellipsis"
                 >
-                  <div className="flex gap-2">
-                    <Avatar>
+                  <div className="flex gap-2 items-start">
+                    <Avatar className="w-8 h-8">
                       <AvatarImage
                         src={notification.User.avatarUrl}
                         alt="Profile Picture"
