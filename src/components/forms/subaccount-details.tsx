@@ -68,17 +68,18 @@ const SubAccountDetails: React.FC<SubAccountDetailsProps> = ({
   const router = useRouter();
 
   const form = useForm<z.infer<typeof formSchema>>({
+    mode: "onChange",
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: details?.name,
-      companyEmail: details?.companyEmail,
-      companyPhone: details?.companyPhone,
-      address: details?.address,
-      city: details?.city,
-      zipCode: details?.zipCode,
-      state: details?.state,
-      country: details?.country,
-      subAccountLogo: details?.subAccountLogo,
+      name: details?.name ?? "",
+      companyEmail: details?.companyEmail ?? "",
+      companyPhone: details?.companyPhone ?? "",
+      address: details?.address ?? "",
+      city: details?.city ?? "",
+      zipCode: details?.zipCode ?? "",
+      state: details?.state ?? "",
+      country: details?.country ?? "",
+      subAccountLogo: details?.subAccountLogo ?? "",
     },
   });
 
