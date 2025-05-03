@@ -91,13 +91,16 @@ const UserDetails = ({ id, type, userData, subAccounts }: Props) => {
 
   // get authUserDetails
   useEffect(() => {
-    if (data.user) {
-      const fetchDetails = async () => {
+    const fetchDetails = async () => {
+      try {
         const response = await getAuthUserDetails();
         if (response) setAuthUserData(response);
-      };
-    }
-  }, [data]);
+      } catch (error) {
+        console.error("Error fetching auth user details :", error);
+      }
+    };
+    fetchDetails();
+  }, []);
 
   // get permissions
   useEffect(() => {
@@ -118,7 +121,7 @@ const UserDetails = ({ id, type, userData, subAccounts }: Props) => {
     if (userData) {
       form.reset(userData);
     }
-  }, [userData, data]);
+  }, [userData, data, form]);
 
   const onChangePermission = async (
     subAccountId: string,
@@ -168,17 +171,22 @@ const UserDetails = ({ id, type, userData, subAccounts }: Props) => {
     if (userData || data?.user) {
       const updatedUser = await updateUser(values);
 
-      authUserData?.Agency?.SubAccount.filter((subacc) =>
-        authUserData.Permissions.find(
-          (p) => p.subAccountId === subacc.id && p.access
-        )
-      ).forEach(async (subaccount) => {
-        await saveActivityLogsNotification({
-          agencyId: undefined,
-          description: `Updated ${userData?.name} information`,
-          subaccountId: subaccount.id,
-        });
-      });
+      if (authUserData?.Agency?.SubAccount && authUserData.Permissions) {
+        const subaccountsWithAccess = authUserData.Agency.SubAccount.filter(
+          (subacc) =>
+            authUserData.Permissions.find(
+              (p) => p.subAccountId === subacc.id && p.access
+            )
+        );
+
+        for (const subaccount of subaccountsWithAccess) {
+          await saveActivityLogsNotification({
+            agencyId: undefined,
+            description: `Updated ${userData?.name} information`,
+            subaccountId: subaccount.id,
+          });
+        }
+      }
 
       if (updatedUser) {
         toast.success("Update User Information");
@@ -347,7 +355,7 @@ const UserDetails = ({ id, type, userData, subAccounts }: Props) => {
                     return (
                       <div
                         key={subaccount.id}
-                        className="flex flex-col items-center justify-between rounded-lg border p-4"
+                        className="flex items-center justify-between rounded-lg border p-4"
                       >
                         <div>
                           <p>{subaccount.name}</p>
