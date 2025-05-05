@@ -65,13 +65,13 @@ const InfoBar = ({ notifications, role, className, subAccountId }: Props) => {
               </SheetHeader>
 
               {(role === "AGENCY_ADMIN" || role === "AGENCY_OWNER") && (
-                <Card className="flex items-center justify-between p-4 mb-1 mt-0.5">
+                <Card className="flex !flex-row items-center justify-between p-4 mb-1 mt-0.5 relative top-[-25px]">
                   Current Subaccount
                   <Switch checked={showAll} onCheckedChange={handleSwitch} />
                 </Card>
               )}
 
-              <div className="flex-1 overflow-y-auto pr-2 mt-2">
+              <div className="flex-1 overflow-y-auto pr-2 mt-2 relative top-[-39px]">
                 {filteredNotifications?.length === 0 ? (
                   <div className="flex items-center justify-center text-muted-foreground h-full">
                     You have no Notifications

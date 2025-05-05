@@ -130,42 +130,55 @@ const UserDetails = ({ id, type, userData, subAccounts }: Props) => {
   ) => {
     if (!data.user?.email) return;
     setLoadingPermissions(true);
+
     const response = await changeUserPermissions(
       permissionsId ? permissionsId : v4(),
       data.user.email,
       subAccountId,
       val
     );
-    if (type === "agency") {
+
+    if (type === "agency" && authUserData?.Agency?.id) {
+      const subAccount = subAccountPermissions?.Permissions.find(
+        (p) => p.subAccountId === subAccountId
+      )?.SubAccount;
+
       await saveActivityLogsNotification({
-        agencyId: authUserData?.Agency?.id,
-        description: `Gave ${userData?.name} access to | ${
-          subAccountPermissions?.Permissions.find(
-            (p) => p.subAccountId === subAccountId
-          )?.SubAccount.name
-        } `,
-        subaccountId: subAccountPermissions?.Permissions.find(
-          (p) => p.subAccountId === subAccountId
-        )?.SubAccount.id,
+        agencyId: authUserData.Agency.id,
+        description: val
+          ? `Gave ${userData?.name} access to | ${subAccount?.name}`
+          : `Removed ${userData?.name} access from | ${subAccount?.name}`,
+        subaccountId: subAccount?.id,
       });
     }
+
     if (response) {
-      toast.success("The request was successfull");
+      toast.success("Permissions updated successfully");
+      // Update local state to reflect the change
       if (subAccountPermissions) {
-        subAccountPermissions.Permissions.find((permi) => {
-          if (permi.subAccountId === subAccountId) {
-            return { ...permi, access: !permi.access };
-          }
-          return permi;
+        setSubAccountsPermissions((prev) => {
+          if (!prev) return null;
+
+          const updatedPermissions = prev.Permissions.map((permission) => {
+            if (permission.subAccountId === subAccountId) {
+              return { ...permission, access: val };
+            }
+            return permission;
+          });
+
+          return {
+            ...prev,
+            Permissions: updatedPermissions,
+          };
         });
       }
     } else {
       toast.error("Could not update permissions");
     }
+
     router.refresh();
     setLoadingPermissions(false);
   };
-
   const onSubmit = async (values: z.infer<typeof userDataSchema>) => {
     if (!id) return;
     if (userData || data?.user) {

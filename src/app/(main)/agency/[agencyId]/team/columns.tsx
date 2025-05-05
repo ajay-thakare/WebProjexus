@@ -38,7 +38,11 @@ import { Copy, Edit, MoreHorizontal, Trash } from "lucide-react";
 import { useModal } from "@/providers/modal-provider";
 import UserDetails from "@/components/forms/user-details";
 
-import { deleteUser, getUser } from "@/lib/queries";
+import {
+  deleteUser,
+  getUser,
+  saveActivityLogsNotification,
+} from "@/lib/queries";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { UsersWithAgencySubAccountPermissionsSidebarOptions } from "@/lib/types";
@@ -162,6 +166,40 @@ const CellActions: React.FC<CellActionsProps> = ({ rowData }) => {
   if (!rowData) return;
   if (!rowData.Agency) return;
 
+  const handleDeleteUser = async () => {
+    setLoading(true);
+    try {
+      // delete the user
+      await deleteUser(rowData.id);
+
+      // Log the activity
+      await saveActivityLogsNotification({
+        agencyId: rowData?.Agency?.id,
+        description: `Removed ${rowData.name} (${rowData.email}) from the agency`,
+        subaccountId: undefined,
+      });
+
+      toast.custom((t) => (
+        <div
+          className={`bg-white rounded shadow p-4 w-96 ${
+            t.visible ? "animate-enter" : "animate-leave"
+          }`}
+        >
+          <strong className="text-black text-sm">Deleted User</strong>
+          <div className="text-gray-600 text-sm mt-1">
+            The user has been removed from this agency and no longer has access.
+          </div>
+        </div>
+      ));
+    } catch (error) {
+      toast.error("Failed to delete user");
+      console.error("Error deleting user:", error);
+    } finally {
+      setLoading(false);
+      router.refresh();
+    }
+  };
+
   return (
     <AlertDialog>
       <DropdownMenu>
@@ -191,6 +229,7 @@ const CellActions: React.FC<CellActionsProps> = ({ rowData }) => {
                   <UserDetails
                     type="agency"
                     id={rowData?.Agency?.id || null}
+                    userData={rowData}
                     subAccounts={rowData?.Agency?.SubAccount}
                   />
                 </CustomModal>,
@@ -205,7 +244,10 @@ const CellActions: React.FC<CellActionsProps> = ({ rowData }) => {
           </DropdownMenuItem>
           {rowData.role !== "AGENCY_OWNER" && (
             <AlertDialogTrigger asChild>
-              <DropdownMenuItem className="flex gap-2" onClick={() => {}}>
+              <DropdownMenuItem
+                className="flex gap-2"
+                onSelect={(e) => e.preventDefault()}
+              >
                 <Trash size={15} /> Remove User
               </DropdownMenuItem>
             </AlertDialogTrigger>
@@ -223,31 +265,17 @@ const CellActions: React.FC<CellActionsProps> = ({ rowData }) => {
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter className="flex items-center">
-          <AlertDialogCancel className="mb-2">Cancel</AlertDialogCancel>
+          <AlertDialogCancel>Cancel</AlertDialogCancel>
           <AlertDialogAction
             disabled={loading}
             className="bg-destructive hover:bg-destructive"
-            onClick={async () => {
-              setLoading(true);
-              await deleteUser(rowData.id);
-              toast.custom((t) => (
-                <div
-                  className={`bg-white rounded shadow p-4 w-96 ${
-                    t.visible ? "animate-enter" : "animate-leave"
-                  }`}
-                >
-                  <strong className="text-black text-sm">Deleted User</strong>
-                  <div className="text-gray-600 text-sm mt-1">
-                    The user has been removed from this agency and no longer has
-                    access.
-                  </div>
-                </div>
-              ));
-              setLoading(false);
-              router.refresh();
-            }}
+            onClick={handleDeleteUser}
           >
-            Delete
+            {loading ? (
+              <span className="animate-pulse">Deleting...</span>
+            ) : (
+              "Delete"
+            )}
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
