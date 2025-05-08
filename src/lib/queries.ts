@@ -1,6 +1,6 @@
 "use server";
 
-import { clerkClient, currentUser } from "@clerk/nextjs/server";
+import { clerkClient, currentUser, Invitation } from "@clerk/nextjs/server";
 import { db } from "./db";
 import { redirect } from "next/navigation";
 import { Agency, Plan, Role, SubAccount, User } from "@prisma/client";
@@ -492,31 +492,93 @@ export const getUser = async (id: string) => {
   return user;
 };
 
+export const checkIfInvitationExists = async (
+  email: string,
+  agencyId: string
+): Promise<boolean> => {
+  const existingInvitation = await db.invitation.findUnique({
+    where: { email, agencyId },
+  });
+  return !!existingInvitation;
+};
+
 export const sendInvitation = async (
   role: Role,
   email: string,
   agencyId: string
 ) => {
-  const response = await db.invitation.create({
-    data: { role, email, agencyId },
-  });
-
   try {
-    const invitation = await (
-      await clerkClient()
-    ).invitations.createInvitation({
-      emailAddress: email,
-      redirectUrl: process.env.NEXT_PUBLIC_URL,
-      publicMetadata: {
-        throughInvitation: true,
-        role,
-      },
+    // create the invitation in your database
+    const response = await db.invitation.create({
+      data: { role, email, agencyId },
     });
-  } catch (error) {
+
+    try {
+      const clerk = await clerkClient();
+
+      await clerk.invitations.createInvitation({
+        emailAddress: email,
+        redirectUrl: process.env.NEXT_PUBLIC_URL,
+        publicMetadata: {
+          throughInvitation: true,
+          role,
+          agencyId,
+        },
+      });
+    } catch (clerkError: any) {
+      // Handle case where email already exists as a user in Clerk
+      if (clerkError?.errors?.[0]?.code === "form_identifier_exists") {
+        console.error(
+          `Email ${email} already exists in Clerk. Skipping invitation.`
+        );
+
+        //  here we can delete db user from Invitation
+
+        return {
+          ...response,
+          emailAlreadyExists: true,
+        };
+      }
+
+      // Handle case where invitation already exists for this email
+      if (clerkError?.errors?.[0]?.code === "duplicate_record") {
+        console.error(
+          `A pending invitation already exists for ${email}. Skipping Clerk invitation.`
+        );
+
+        return {
+          ...response,
+          invitationAlreadyExists: true,
+        };
+      }
+
+      // For other Clerk errors, delete the invitation from your database
+      await db.invitation.delete({ where: { id: response.id } });
+
+      throw clerkError;
+    }
+
+    return response;
+  } catch (error: any) {
     console.log("Send Invitation Error :: ", error);
+
+    // Log the full error details when it's a Clerk error
+    if (error && typeof error === "object" && "clerkError" in error) {
+      console.log("Clerk Error Details:", {
+        status: error.status,
+        clerkTraceId: error.clerkTraceId,
+      });
+
+      // Log each error message separately for clarity
+      if (error.errors && Array.isArray(error.errors)) {
+        error.errors.forEach((err: any, index: number) => {
+          console.log(`Error ${index + 1}:`, JSON.stringify(err, null, 2));
+        });
+      }
+    }
+
     throw error;
   }
-  return response;
 };
 
 export const getMedia = async (subaccountId: string) => {

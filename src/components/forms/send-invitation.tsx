@@ -28,7 +28,11 @@ import {
 } from "../ui/select";
 import { Button } from "../ui/button";
 import Loading from "../global/loading";
-import { saveActivityLogsNotification, sendInvitation } from "@/lib/queries";
+import {
+  checkIfInvitationExists,
+  saveActivityLogsNotification,
+  sendInvitation,
+} from "@/lib/queries";
 import toast from "react-hot-toast";
 
 interface SendInvitationProps {
@@ -52,17 +56,29 @@ const SendInvitation: React.FC<SendInvitationProps> = ({ agencyId }) => {
 
   const onSubmit = async (values: z.infer<typeof userDataSchema>) => {
     try {
-      console.log("sending invitation ...............");
+      console.log("Sending invitation...");
+
+      const invitationExists = await checkIfInvitationExists(
+        values.email,
+        agencyId
+      );
+      if (invitationExists) {
+        toast.error("Invitation already sent to this user");
+        return;
+      }
+
       const res = await sendInvitation(values.role, values.email, agencyId);
+
       await saveActivityLogsNotification({
         agencyId: agencyId,
         description: `Invited ${res.email}`,
         subaccountId: undefined,
       });
-      toast.success("Successfully sent an invitation !!!");
+
+      toast.success("Invitation sent successfully!");
     } catch (error) {
-      console.log(error);
-      toast.error("Oops!, Could not send Invitation.");
+      console.error("Failed to send invitation:", error);
+      toast.error("Could not send invitation");
     }
   };
 
