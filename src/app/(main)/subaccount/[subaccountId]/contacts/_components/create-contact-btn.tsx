@@ -17,7 +17,7 @@ const CreateContactBtn = ({ subaccountId }: Props) => {
     setOpen(
       <CustomModal
         title="Create New Contact"
-        subheading="Add a new contact to your database"
+        subheading="Contacts are like customers."
       >
         <ContactUserForm subaccountId={subaccountId} />
       </CustomModal>
