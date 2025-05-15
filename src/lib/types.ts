@@ -108,3 +108,14 @@ export const TicketFormSchema = z.object({
 export type TicketDetails = Prisma.PromiseReturnType<
   typeof _getTicketWithAllRelations
 >;
+
+export const ContactUserFormSchema = z.object({
+  name: z
+    .string()
+    .min(2, "Name must be at least 2 characters")
+    .max(50, "Name cannot exceed 50 characters"),
+  email: z
+    .string()
+    .email("Please enter a valid email address")
+    .max(50, "Email cannot exceed 50 characters"),
+});

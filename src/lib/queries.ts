@@ -870,3 +870,27 @@ export const deleteTag = async (tagId: string) => {
   const response = await db.tag.delete({ where: { id: tagId } });
   return response;
 };
+
+export const upsertContact = async (
+  contact: Prisma.ContactUncheckedCreateInput
+) => {
+  const response = await db.contact.upsert({
+    where: { id: contact.id || v4() },
+    update: contact,
+    create: contact,
+  });
+  return response;
+};
+
+export const deleteContact = async (contactId: string) => {
+  try {
+    const response = await db.contact.delete({
+      where: { id: contactId },
+    });
+
+    return response;
+  } catch (error) {
+    console.error("Error deleting contact:", error);
+    throw new Error("Failed to delete contact");
+  }
+};
