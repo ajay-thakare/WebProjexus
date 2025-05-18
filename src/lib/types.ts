@@ -18,6 +18,7 @@ import {
 } from "./queries";
 import { db } from "./db";
 import { z } from "zod";
+import Stripe from "stripe";
 
 const __getUsersWithAgencySubAccountPermissionsSidebarOptions = async (
   agencyId: string
@@ -119,3 +120,5 @@ export const ContactUserFormSchema = z.object({
     .email("Please enter a valid email address")
     .max(50, "Email cannot exceed 50 characters"),
 });
+
+export type PricesList = Stripe.ApiList<Stripe.Price>;
