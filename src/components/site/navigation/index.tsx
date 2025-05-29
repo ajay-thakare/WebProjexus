@@ -1,15 +1,12 @@
 import { ModeToggle } from "@/components/global/mode-toggle";
 import { UserButton } from "@clerk/nextjs";
-import { User } from "@clerk/nextjs/server";
+import { currentUser, User } from "@clerk/nextjs/server";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-type Props = {
-  user?: null | User;
-};
-
-const Navigation = ({ user }: Props) => {
+const Navigation = async () => {
+  const user = await currentUser();
   return (
     <div className="fixed top-0 right-0 left-0 flex justify-between p-4 items-center z-10">
       {/* left */}
@@ -33,14 +30,16 @@ const Navigation = ({ user }: Props) => {
       </nav>
       {/* right */}
       <aside className="flex gap-2 items-center">
-        <Link
-          href={"/agency"}
-          className="bg-primary text-white p-2 px-4 rounded-md hover:bg-primary/80 "
-          //   transition remaining
-        >
-          Login
-        </Link>
-        <UserButton />
+        {!user ? (
+          <Link
+            href={"/agency"}
+            className="bg-primary text-white p-2 px-4 rounded-md hover:bg-primary/80 transition-colors"
+          >
+            Login
+          </Link>
+        ) : (
+          <UserButton />
+        )}
         <ModeToggle />
       </aside>
     </div>
