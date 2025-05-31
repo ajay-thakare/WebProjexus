@@ -156,6 +156,29 @@ const Container = ({ element }: Props) => {
           },
         });
         break;
+
+      case "image":
+        dispatch({
+          type: "ADD_ELEMENT",
+          payload: {
+            containerId: id,
+            elementDetails: {
+              content: {
+                src: "https://placehold.co/600x400",
+                alt: "Placeholder Image",
+              },
+              id: v4(),
+              name: "Image",
+              styles: {
+                ...defaultStyles,
+                width: "100%",
+                height: "auto",
+              },
+              type: "image",
+            },
+          },
+        });
+        break;
     }
   };
 

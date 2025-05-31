@@ -13,6 +13,7 @@ import LinkPlaceholder from "./link-placeholder";
 import TwoColumnsPlaceholder from "./two-columns-placeholder";
 import ContactFormComponentPlaceholder from "./contact-form-placeholder";
 import CheckoutPlaceholder from "./checkout-placeholder";
+import ImagePlaceholder from "./image-placeholder";
 
 type Props = {};
 
@@ -63,6 +64,12 @@ const ComponentsTab = (props: Props) => {
       Component: <LinkPlaceholder />,
       label: "Link",
       id: "link",
+      group: "elements",
+    },
+    {
+      Component: <ImagePlaceholder />,
+      label: "Image",
+      id: "image",
       group: "elements",
     },
   ];

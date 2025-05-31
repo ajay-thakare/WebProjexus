@@ -6,6 +6,7 @@ import LinkComponent from "./link";
 import VideoComponent from "./video";
 import ContactFormComponent from "./contact-form-component";
 import Checkout from "./checkout";
+import ImageComponent from "./image";
 
 type Props = {
   element: EditorElement;
@@ -36,6 +37,9 @@ const Recursive = ({ element }: Props) => {
 
     case "paymentForm":
       return <Checkout element={element} />;
+
+    case "image":
+      return <ImageComponent element={element} />;
 
     default:
       return null;

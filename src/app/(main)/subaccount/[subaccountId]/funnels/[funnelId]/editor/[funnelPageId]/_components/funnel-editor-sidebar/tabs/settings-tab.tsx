@@ -116,6 +116,29 @@ const SettingsTab = (props: Props) => {
                 />
               </div>
             )}
+          {state.editor.selectedElement.type === "image" &&
+            !Array.isArray(state.editor.selectedElement.content) && (
+              <div className="flex flex-col gap-4">
+                <div className="flex flex-col gap-2">
+                  <p className="text-muted-foreground">Image Source</p>
+                  <Input
+                    id="src"
+                    placeholder="https://example.com/image.jpg"
+                    onChange={handleChangeCustomValues}
+                    value={state.editor.selectedElement.content.src || ""}
+                  />
+                </div>
+                <div className="flex flex-col gap-2">
+                  <p className="text-muted-foreground">Alt Text</p>
+                  <Input
+                    id="alt"
+                    placeholder="Image description"
+                    onChange={handleChangeCustomValues}
+                    value={state.editor.selectedElement.content.alt || ""}
+                  />
+                </div>
+              </div>
+            )}
         </AccordionContent>
       </AccordionItem>
       <AccordionItem value="Typography" className="px-6 py-0  border-y-[1px]">
@@ -233,7 +256,7 @@ const SettingsTab = (props: Props) => {
                       id="height"
                       placeholder="px"
                       onChange={handleOnChanges}
-                      value={state.editor.selectedElement.styles.height}
+                      value={state.editor.selectedElement.styles.height || ""}
                     />
                   </div>
                   <div>
