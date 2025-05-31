@@ -18,6 +18,7 @@ import { Funnel } from "@prisma/client";
 import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import toast from "react-hot-toast";
 
 interface FunnelProductsTableProps {
   defaultData: Funnel;
@@ -36,9 +37,21 @@ const FunnelProductsTable: React.FC<FunnelProductsTableProps> = ({
 
   const handleSaveProducts = async () => {
     setIsLoading(true);
+
+    if (liveProducts.length === 0) {
+      toast.custom(
+        <div className="bg-red-100 text-red-700 p-4 rounded-lg shadow-md border border-red-300 max-w-sm">
+          <strong className="block font-semibold">No Products Selected</strong>
+          <span>
+            Please select at least one product to make it live before saving.
+          </span>
+        </div>
+      );
+      return;
+    }
     const response = await updateFunnelProducts(
-      JSON.stringify(liveProducts),
-      defaultData.id
+      defaultData.id,
+      JSON.stringify(liveProducts)
     );
     await saveActivityLogsNotification({
       agencyId: undefined,

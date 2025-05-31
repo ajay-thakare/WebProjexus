@@ -396,11 +396,11 @@ export const upsertSubAccount = async (subAccount: SubAccount) => {
             icon: "database",
             link: `/subaccount/${subAccount.id}/media`,
           },
-          {
-            name: "Automations",
-            icon: "chip",
-            link: `/subaccount/${subAccount.id}/automations`,
-          },
+          // {
+          //   name: "Automations",
+          //   icon: "chip",
+          //   link: `/subaccount/${subAccount.id}/automations`,
+          // },
           {
             name: "Pipelines",
             icon: "flag",
@@ -964,6 +964,13 @@ export const upsertFunnelPage = async (
 };
 
 export const deleteFunnelPage = async (funnelPageId: string) => {
+  const response = await db.funnelPage.findUnique({
+    where: { id: funnelPageId },
+  });
+  return response;
+};
+
+export const getFunnelPageDetails = async (funnelPageId: string) => {
   const response = await db.funnelPage.findUnique({
     where: { id: funnelPageId },
   });

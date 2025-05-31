@@ -336,6 +336,7 @@ model FunnelPage {
   content      String?  @db.Text
   order        Int
   previewImage String?  @db.Text
+  published    Boolean  @default(false)
   funnelId     String
   Funnel       Funnel   @relation(fields: [funnelId], references: [id], onDelete: Cascade)
 
