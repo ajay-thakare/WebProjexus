@@ -7,6 +7,8 @@ import VideoComponent from "./video";
 import ContactFormComponent from "./contact-form-component";
 import Checkout from "./checkout";
 import ImageComponent from "./image";
+import ButtonComponent from "./button";
+import CountdownComponent from "./countdown";
 
 type Props = {
   element: EditorElement;
@@ -40,6 +42,12 @@ const Recursive = ({ element }: Props) => {
 
     case "image":
       return <ImageComponent element={element} />;
+
+    case "button":
+      return <ButtonComponent element={element} />;
+
+    case "countdown":
+      return <CountdownComponent element={element} />;
 
     default:
       return null;

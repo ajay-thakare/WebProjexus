@@ -14,6 +14,8 @@ import TwoColumnsPlaceholder from "./two-columns-placeholder";
 import ContactFormComponentPlaceholder from "./contact-form-placeholder";
 import CheckoutPlaceholder from "./checkout-placeholder";
 import ImagePlaceholder from "./image-placeholder";
+import ButtonPlaceholder from "./button-placeholder";
+import CountdownPlaceholder from "./countdown-placeholder";
 
 type Props = {};
 
@@ -70,6 +72,18 @@ const ComponentsTab = (props: Props) => {
       Component: <ImagePlaceholder />,
       label: "Image",
       id: "image",
+      group: "elements",
+    },
+    {
+      Component: <ButtonPlaceholder />,
+      label: "Button",
+      id: "button",
+      group: "elements",
+    },
+    {
+      Component: <CountdownPlaceholder />,
+      label: "Timer",
+      id: "countdown",
       group: "elements",
     },
   ];

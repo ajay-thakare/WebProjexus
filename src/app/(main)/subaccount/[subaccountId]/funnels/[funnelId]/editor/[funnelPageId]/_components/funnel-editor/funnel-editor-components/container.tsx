@@ -179,6 +179,62 @@ const Container = ({ element }: Props) => {
           },
         });
         break;
+
+      case "button":
+        dispatch({
+          type: "ADD_ELEMENT",
+          payload: {
+            containerId: id,
+            elementDetails: {
+              content: {
+                innerText: "Click Me",
+                href: "#",
+              },
+              id: v4(),
+              name: "Button",
+              styles: {
+                backgroundColor: "#3b82f6",
+                color: "white",
+                padding: "10px 16px",
+                borderRadius: "6px",
+                border: "none",
+                cursor: "pointer",
+                ...defaultStyles,
+              },
+              type: "button",
+            },
+          },
+        });
+        break;
+
+      case "countdown":
+        dispatch({
+          type: "ADD_ELEMENT",
+          payload: {
+            containerId: id,
+            elementDetails: {
+              content: {
+                targetDate: new Date(
+                  Date.now() + 7 * 24 * 60 * 60 * 1000
+                ).toISOString(), // 7 days from now
+              },
+              id: v4(),
+              name: "Countdown",
+              styles: {
+                color: "black",
+                width: "100%",
+                padding: "15px",
+                backgroundColor: "white",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                gap: "10px",
+              },
+              type: "countdown",
+            },
+          },
+        });
+        break;
     }
   };
 

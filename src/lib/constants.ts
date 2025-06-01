@@ -224,6 +224,8 @@ export type EditorBtns =
   | "video"
   | "__body"
   | "image"
+  | "button"
+  | "countdown"
   | null
   | "3Col";
 

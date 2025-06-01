@@ -13,7 +13,15 @@ export type EditorElement = {
   type: EditorBtns;
   content:
     | EditorElement[]
-    | { href?: string; innerText?: string; src?: string; alt?: string };
+    | {
+        href?: string;
+        innerText?: string;
+        src?: string;
+        alt?: string;
+        targetDate?: string;
+        target?: string;
+        action?: "scroll" | "download" | "popup" | "submit";
+      };
 };
 
 export type Editor = {

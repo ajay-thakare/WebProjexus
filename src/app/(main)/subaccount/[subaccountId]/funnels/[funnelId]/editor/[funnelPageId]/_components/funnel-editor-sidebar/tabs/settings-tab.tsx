@@ -139,6 +139,422 @@ const SettingsTab = (props: Props) => {
                 </div>
               </div>
             )}
+          {state.editor.selectedElement.type === "button" &&
+            !Array.isArray(state.editor.selectedElement.content) && (
+              <div className="flex flex-col gap-4">
+                {/* Button Text */}
+                <div className="flex flex-col gap-2">
+                  <p className="text-muted-foreground font-medium">
+                    Button Text
+                  </p>
+                  <Input
+                    id="innerText"
+                    placeholder="Click Me!"
+                    onChange={handleChangeCustomValues}
+                    value={state.editor.selectedElement.content.innerText || ""}
+                  />
+                </div>
+
+                {/* Button Link */}
+                <div className="flex flex-col gap-2">
+                  <p className="text-muted-foreground font-medium">
+                    Button Link (URL)
+                  </p>
+                  <Input
+                    id="href"
+                    placeholder="https://example.com or #section"
+                    onChange={handleChangeCustomValues}
+                    value={state.editor.selectedElement.content.href || ""}
+                  />
+                  <p className="text-xs text-muted-foreground">
+                    Where should this button navigate when clicked?
+                  </p>
+                </div>
+
+                {/* Button Style Presets */}
+                <div className="flex flex-col gap-2">
+                  <p className="text-muted-foreground font-medium">
+                    Button Style Presets
+                  </p>
+                  <div className="grid grid-cols-2 gap-2">
+                    <button
+                      type="button"
+                      className="px-3 py-2 text-xs bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors"
+                      onClick={() => {
+                        dispatch({
+                          type: "UPDATE_ELEMENT",
+                          payload: {
+                            elementDetails: {
+                              ...state.editor.selectedElement,
+                              styles: {
+                                ...state.editor.selectedElement.styles,
+                                backgroundColor: "#3b82f6",
+                                color: "white",
+                                border: "none",
+                                borderRadius: "6px",
+                                padding: "12px 24px",
+                                fontSize: "14px",
+                                fontWeight: "500",
+                                cursor: "pointer",
+                                transition: "all 0.2s",
+                              },
+                            },
+                          },
+                        });
+                      }}
+                    >
+                      Primary
+                    </button>
+
+                    <button
+                      type="button"
+                      className="px-3 py-2 text-xs bg-gray-600 text-white rounded-md hover:bg-gray-700 transition-colors"
+                      onClick={() => {
+                        dispatch({
+                          type: "UPDATE_ELEMENT",
+                          payload: {
+                            elementDetails: {
+                              ...state.editor.selectedElement,
+                              styles: {
+                                ...state.editor.selectedElement.styles,
+                                backgroundColor: "#4b5563",
+                                color: "white",
+                                border: "none",
+                                borderRadius: "6px",
+                                padding: "12px 24px",
+                                fontSize: "14px",
+                                fontWeight: "500",
+                                cursor: "pointer",
+                                transition: "all 0.2s",
+                              },
+                            },
+                          },
+                        });
+                      }}
+                    >
+                      Secondary
+                    </button>
+
+                    <button
+                      type="button"
+                      className="px-3 py-2 text-xs bg-green-500 text-white rounded-md hover:bg-green-600 transition-colors"
+                      onClick={() => {
+                        dispatch({
+                          type: "UPDATE_ELEMENT",
+                          payload: {
+                            elementDetails: {
+                              ...state.editor.selectedElement,
+                              styles: {
+                                ...state.editor.selectedElement.styles,
+                                backgroundColor: "#10b981",
+                                color: "white",
+                                border: "none",
+                                borderRadius: "6px",
+                                padding: "12px 24px",
+                                fontSize: "14px",
+                                fontWeight: "500",
+                                cursor: "pointer",
+                                transition: "all 0.2s",
+                              },
+                            },
+                          },
+                        });
+                      }}
+                    >
+                      Success
+                    </button>
+
+                    <button
+                      type="button"
+                      className="px-3 py-2 text-xs border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 transition-colors"
+                      onClick={() => {
+                        dispatch({
+                          type: "UPDATE_ELEMENT",
+                          payload: {
+                            elementDetails: {
+                              ...state.editor.selectedElement,
+                              styles: {
+                                ...state.editor.selectedElement.styles,
+                                backgroundColor: "transparent",
+                                color: "#374151",
+                                border: "1px solid #d1d5db",
+                                borderRadius: "6px",
+                                padding: "12px 24px",
+                                fontSize: "14px",
+                                fontWeight: "500",
+                                cursor: "pointer",
+                                transition: "all 0.2s",
+                              },
+                            },
+                          },
+                        });
+                      }}
+                    >
+                      Outline
+                    </button>
+                  </div>
+                </div>
+
+                {/* Button Size Presets */}
+                <div className="flex flex-col gap-2">
+                  <p className="text-muted-foreground font-medium">
+                    Button Size
+                  </p>
+                  <div className="flex gap-2">
+                    <button
+                      type="button"
+                      className="flex-1 px-2 py-1 text-xs bg-secondary hover:bg-secondary/80 rounded-md transition-colors"
+                      onClick={() => {
+                        dispatch({
+                          type: "UPDATE_ELEMENT",
+                          payload: {
+                            elementDetails: {
+                              ...state.editor.selectedElement,
+                              styles: {
+                                ...state.editor.selectedElement.styles,
+                                padding: "8px 16px",
+                                fontSize: "12px",
+                              },
+                            },
+                          },
+                        });
+                      }}
+                    >
+                      Small
+                    </button>
+
+                    <button
+                      type="button"
+                      className="flex-1 px-2 py-1 text-xs bg-secondary hover:bg-secondary/80 rounded-md transition-colors"
+                      onClick={() => {
+                        dispatch({
+                          type: "UPDATE_ELEMENT",
+                          payload: {
+                            elementDetails: {
+                              ...state.editor.selectedElement,
+                              styles: {
+                                ...state.editor.selectedElement.styles,
+                                padding: "12px 24px",
+                                fontSize: "14px",
+                              },
+                            },
+                          },
+                        });
+                      }}
+                    >
+                      Medium
+                    </button>
+
+                    <button
+                      type="button"
+                      className="flex-1 px-2 py-1 text-xs bg-secondary hover:bg-secondary/80 rounded-md transition-colors"
+                      onClick={() => {
+                        dispatch({
+                          type: "UPDATE_ELEMENT",
+                          payload: {
+                            elementDetails: {
+                              ...state.editor.selectedElement,
+                              styles: {
+                                ...state.editor.selectedElement.styles,
+                                padding: "16px 32px",
+                                fontSize: "16px",
+                              },
+                            },
+                          },
+                        });
+                      }}
+                    >
+                      Large
+                    </button>
+                  </div>
+                </div>
+
+                {/* Button Actions */}
+                <div className="flex flex-col gap-2">
+                  <p className="text-muted-foreground font-medium">
+                    Button Action
+                  </p>
+                  <Select
+                    onValueChange={(value) => {
+                      handleChangeCustomValues({
+                        target: {
+                          id: "action",
+                          value: value,
+                        },
+                      });
+                    }}
+                    value={
+                      state.editor.selectedElement.content.action || "link"
+                    }
+                  >
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select button action" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="link">Navigate to URL</SelectItem>
+                      <SelectItem value="scroll">Scroll to Section</SelectItem>
+                      <SelectItem value="popup">Open Popup</SelectItem>
+                      <SelectItem value="download">Download File</SelectItem>
+                      <SelectItem value="submit">Submit Form</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                {/* Advanced Settings Toggle */}
+                <div className="flex flex-col gap-2">
+                  <div className="flex items-center gap-2">
+                    <input
+                      type="checkbox"
+                      id="openInNewTab"
+                      className="h-4 w-4"
+                      onChange={(e) => {
+                        handleChangeCustomValues({
+                          target: {
+                            id: "target",
+                            value: e.target.checked ? "_blank" : "_self",
+                          },
+                        });
+                      }}
+                      checked={
+                        state.editor.selectedElement.content.target === "_blank"
+                      }
+                    />
+                    <Label
+                      htmlFor="openInNewTab"
+                      className="text-sm text-muted-foreground"
+                    >
+                      Open link in new tab
+                    </Label>
+                  </div>
+                </div>
+
+                {/* Button Preview */}
+                <div className="flex flex-col gap-2">
+                  <p className="text-muted-foreground font-medium">Preview</p>
+                  <div className="p-4 bg-muted rounded-md flex justify-center">
+                    <button
+                      style={{
+                        ...state.editor.selectedElement.styles,
+                        pointerEvents: "none",
+                      }}
+                      className="inline-flex items-center justify-center"
+                    >
+                      {state.editor.selectedElement.content.innerText ||
+                        "Button Text"}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
+
+          {state.editor.selectedElement.type === "countdown" &&
+            !Array.isArray(state.editor.selectedElement.content) && (
+              <div className="flex flex-col gap-4">
+                <div className="flex flex-col gap-2">
+                  <p className="text-muted-foreground">Target Date & Time</p>
+                  <Input
+                    type="datetime-local"
+                    id="targetDate"
+                    onChange={handleChangeCustomValues}
+                    value={
+                      state.editor.selectedElement.content.targetDate
+                        ? new Date(
+                            state.editor.selectedElement.content.targetDate
+                          )
+                            .toISOString()
+                            .slice(0, 16)
+                        : ""
+                    }
+                  />
+                  <p className="text-xs text-muted-foreground">
+                    Set the date and time when the countdown should end
+                  </p>
+                </div>
+
+                {/* Quick preset buttons for common time periods */}
+                <div className="flex flex-col gap-2">
+                  <p className="text-muted-foreground">Quick Presets</p>
+                  <div className="grid grid-cols-2 gap-2">
+                    <button
+                      type="button"
+                      className="px-3 py-2 text-xs bg-secondary hover:bg-secondary/80 rounded-md transition-colors"
+                      onClick={() => {
+                        const targetDate = new Date();
+                        targetDate.setHours(targetDate.getHours() + 1);
+                        handleChangeCustomValues({
+                          target: {
+                            id: "targetDate",
+                            value: targetDate.toISOString(),
+                          },
+                        });
+                      }}
+                    >
+                      +1 Hour
+                    </button>
+                    <button
+                      type="button"
+                      className="px-3 py-2 text-xs bg-secondary hover:bg-secondary/80 rounded-md transition-colors"
+                      onClick={() => {
+                        const targetDate = new Date();
+                        targetDate.setDate(targetDate.getDate() + 1);
+                        handleChangeCustomValues({
+                          target: {
+                            id: "targetDate",
+                            value: targetDate.toISOString(),
+                          },
+                        });
+                      }}
+                    >
+                      +1 Day
+                    </button>
+                    <button
+                      type="button"
+                      className="px-3 py-2 text-xs bg-secondary hover:bg-secondary/80 rounded-md transition-colors"
+                      onClick={() => {
+                        const targetDate = new Date();
+                        targetDate.setDate(targetDate.getDate() + 7);
+                        handleChangeCustomValues({
+                          target: {
+                            id: "targetDate",
+                            value: targetDate.toISOString(),
+                          },
+                        });
+                      }}
+                    >
+                      +1 Week
+                    </button>
+                    <button
+                      type="button"
+                      className="px-3 py-2 text-xs bg-secondary hover:bg-secondary/80 rounded-md transition-colors"
+                      onClick={() => {
+                        const targetDate = new Date();
+                        targetDate.setMonth(targetDate.getMonth() + 1);
+                        handleChangeCustomValues({
+                          target: {
+                            id: "targetDate",
+                            value: targetDate.toISOString(),
+                          },
+                        });
+                      }}
+                    >
+                      +1 Month
+                    </button>
+                  </div>
+                </div>
+
+                {/* Display current target date in readable format */}
+                {state.editor.selectedElement.content.targetDate && (
+                  <div className="flex flex-col gap-1 p-3 bg-muted rounded-md">
+                    <p className="text-xs font-medium">Countdown ends on:</p>
+                    <p className="text-sm">
+                      {new Date(
+                        state.editor.selectedElement.content.targetDate
+                      ).toLocaleString()}
+                    </p>
+                  </div>
+                )}
+              </div>
+            )}
         </AccordionContent>
       </AccordionItem>
       <AccordionItem value="Typography" className="px-6 py-0  border-y-[1px]">
@@ -279,7 +695,9 @@ const SettingsTab = (props: Props) => {
                       id="marginTop"
                       placeholder="px"
                       onChange={handleOnChanges}
-                      value={state.editor.selectedElement.styles.marginTop}
+                      value={
+                        state.editor.selectedElement.styles.marginTop || ""
+                      }
                     />
                   </div>
                   <div>
@@ -288,7 +706,9 @@ const SettingsTab = (props: Props) => {
                       placeholder="px"
                       id="marginBottom"
                       onChange={handleOnChanges}
-                      value={state.editor.selectedElement.styles.marginBottom}
+                      value={
+                        state.editor.selectedElement.styles.marginBottom || ""
+                      }
                     />
                   </div>
                 </div>
@@ -299,7 +719,9 @@ const SettingsTab = (props: Props) => {
                       placeholder="px"
                       id="marginLeft"
                       onChange={handleOnChanges}
-                      value={state.editor.selectedElement.styles.marginLeft}
+                      value={
+                        state.editor.selectedElement.styles.marginLeft || ""
+                      }
                     />
                   </div>
                   <div>
@@ -308,7 +730,9 @@ const SettingsTab = (props: Props) => {
                       placeholder="px"
                       id="marginRight"
                       onChange={handleOnChanges}
-                      value={state.editor.selectedElement.styles.marginRight}
+                      value={
+                        state.editor.selectedElement.styles.marginRight || ""
+                      }
                     />
                   </div>
                 </div>
@@ -324,7 +748,9 @@ const SettingsTab = (props: Props) => {
                       placeholder="px"
                       id="paddingTop"
                       onChange={handleOnChanges}
-                      value={state.editor.selectedElement.styles.paddingTop}
+                      value={
+                        state.editor.selectedElement.styles.paddingTop || ""
+                      }
                     />
                   </div>
                   <div>
@@ -333,7 +759,9 @@ const SettingsTab = (props: Props) => {
                       placeholder="px"
                       id="paddingBottom"
                       onChange={handleOnChanges}
-                      value={state.editor.selectedElement.styles.paddingBottom}
+                      value={
+                        state.editor.selectedElement.styles.paddingBottom || ""
+                      }
                     />
                   </div>
                 </div>
@@ -344,7 +772,9 @@ const SettingsTab = (props: Props) => {
                       placeholder="px"
                       id="paddingLeft"
                       onChange={handleOnChanges}
-                      value={state.editor.selectedElement.styles.paddingLeft}
+                      value={
+                        state.editor.selectedElement.styles.paddingLeft || ""
+                      }
                     />
                   </div>
                   <div>
@@ -353,7 +783,9 @@ const SettingsTab = (props: Props) => {
                       placeholder="px"
                       id="paddingRight"
                       onChange={handleOnChanges}
-                      value={state.editor.selectedElement.styles.paddingRight}
+                      value={
+                        state.editor.selectedElement.styles.paddingRight || ""
+                      }
                     />
                   </div>
                 </div>
