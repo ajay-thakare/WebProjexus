@@ -21,6 +21,10 @@ export type EditorElement = {
         targetDate?: string;
         target?: string;
         action?: "scroll" | "download" | "popup" | "submit";
+        controls?: boolean;
+        autoplay?: boolean;
+        muted?: boolean;
+        loop?: boolean;
       };
 };
 

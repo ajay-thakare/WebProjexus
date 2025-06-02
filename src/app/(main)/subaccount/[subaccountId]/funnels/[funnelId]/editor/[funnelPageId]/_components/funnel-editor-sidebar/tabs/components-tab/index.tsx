@@ -16,6 +16,7 @@ import VideoPlaceholder from "./placeholders/media-ph/video-placeholder";
 import ContactFormComponentPlaceholder from "./placeholders/forms-ph/contact-form-placeholder";
 import CountdownPlaceholder from "./placeholders/interactive-ph/countdown-placeholder";
 import CheckoutPlaceholder from "./placeholders/buisness-ph/checkout-placeholder";
+import AudioPlaceholder from "./placeholders/media-ph/audio-placeholder";
 
 type Props = {};
 
@@ -109,12 +110,12 @@ const ComponentsTab = (props: Props) => {
       id: "video",
       group: "media",
     },
-    // {
-    //   Component: <AudioPlaceholder />,
-    //   label: "Audio",
-    //   id: "audio",
-    //   group: "media",
-    // },
+    {
+      Component: <AudioPlaceholder />,
+      label: "Audio",
+      id: "audio",
+      group: "media",
+    },
     // {
     //   Component: <ImageGalleryPlaceholder />,
     //   label: "Image Gallery",

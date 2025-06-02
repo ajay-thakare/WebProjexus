@@ -226,6 +226,7 @@ export type EditorBtns =
   | "image"
   | "button"
   | "countdown"
+  | "audio"
   | null
   | "3Col";
 

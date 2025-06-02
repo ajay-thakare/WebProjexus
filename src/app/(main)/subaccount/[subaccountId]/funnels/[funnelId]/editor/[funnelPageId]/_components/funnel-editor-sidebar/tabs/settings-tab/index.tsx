@@ -20,6 +20,7 @@ import TypographySettings from "./common-setting/typography-settings";
 import DimensionsSettings from "./common-setting/dimensions-settings";
 import DecorationsSettings from "./common-setting/decorations-settings";
 import FlexboxSettings from "./common-setting/flexbox-settings";
+import AudioSettings from "./component-specific-setting/media-settings/audio-settings";
 
 type Props = {};
 
@@ -68,6 +69,11 @@ const SettingsTab = (props: Props) => {
           {state.editor.selectedElement.type === "countdown" &&
             !Array.isArray(state.editor.selectedElement.content) && (
               <CountdownSettings />
+            )}
+
+          {state.editor.selectedElement.type === "audio" &&
+            !Array.isArray(state.editor.selectedElement.content) && (
+              <AudioSettings />
             )}
         </AccordionContent>
       </AccordionItem>

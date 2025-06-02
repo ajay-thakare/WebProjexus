@@ -235,6 +235,32 @@ const Container = ({ element }: Props) => {
           },
         });
         break;
+
+      case "audio":
+        dispatch({
+          type: "ADD_ELEMENT",
+          payload: {
+            containerId: id,
+            elementDetails: {
+              content: {
+                src: "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav",
+                controls: true,
+                autoplay: false,
+                loop: false,
+                muted: false,
+              },
+              id: v4(),
+              name: "Audio Player",
+              styles: {
+                width: "100%",
+                padding: "10px",
+                ...defaultStyles,
+              },
+              type: "audio",
+            },
+          },
+        });
+        break;
     }
   };
 
