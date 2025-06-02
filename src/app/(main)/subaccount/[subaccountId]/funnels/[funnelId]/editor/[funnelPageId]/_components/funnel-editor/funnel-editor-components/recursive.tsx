@@ -1,14 +1,14 @@
 import { EditorElement } from "@/providers/editor/editor-provider";
 import React from "react";
-import TextComponent from "./text";
 import Container from "./container";
-import LinkComponent from "./link";
-import VideoComponent from "./video";
-import ContactFormComponent from "./contact-form-component";
-import Checkout from "./checkout";
-import ImageComponent from "./image";
-import ButtonComponent from "./button";
-import CountdownComponent from "./countdown";
+import TextComponent from "./basic-component/text";
+import LinkComponent from "./basic-component/link";
+import VideoComponent from "./media-component/video";
+import ContactFormComponent from "./forms-component/contact-form-component";
+import Checkout from "./business-component/checkout";
+import ImageComponent from "./media-component/image";
+import ButtonComponent from "./basic-component/button";
+import CountdownComponent from "./interactive-component/countdown";
 
 type Props = {
   element: EditorElement;
