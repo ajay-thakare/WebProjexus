@@ -21,6 +21,8 @@ import DimensionsSettings from "./common-setting/dimensions-settings";
 import DecorationsSettings from "./common-setting/decorations-settings";
 import FlexboxSettings from "./common-setting/flexbox-settings";
 import AudioSettings from "./component-specific-setting/media-settings/audio-settings";
+import DividerSettings from "./component-specific-setting/basic-settings/divider-settings";
+import ListSettings from "./component-specific-setting/basic-settings/list-settings";
 
 type Props = {};
 
@@ -74,6 +76,16 @@ const SettingsTab = (props: Props) => {
           {state.editor.selectedElement.type === "audio" &&
             !Array.isArray(state.editor.selectedElement.content) && (
               <AudioSettings />
+            )}
+
+          {state.editor.selectedElement.type === "divider" &&
+            !Array.isArray(state.editor.selectedElement.content) && (
+              <DividerSettings />
+            )}
+
+          {state.editor.selectedElement.type === "list" &&
+            !Array.isArray(state.editor.selectedElement.content) && (
+              <ListSettings />
             )}
         </AccordionContent>
       </AccordionItem>

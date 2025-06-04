@@ -21,10 +21,20 @@ export type EditorElement = {
         targetDate?: string;
         target?: string;
         action?: "scroll" | "download" | "popup" | "submit";
+        // audio
         controls?: boolean;
         autoplay?: boolean;
         muted?: boolean;
         loop?: boolean;
+
+        // divider
+        dividerStyle?: "solid" | "dashed" | "dotted" | "thick";
+        dividerColor?: string;
+        dividerThickness?: number;
+
+        // list
+        items?: string[];
+        listType?: "unordered" | "ordered" | "none";
       };
 };
 

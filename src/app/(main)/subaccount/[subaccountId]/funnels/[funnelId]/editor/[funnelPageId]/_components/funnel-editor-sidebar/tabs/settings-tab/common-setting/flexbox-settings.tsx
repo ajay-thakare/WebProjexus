@@ -120,7 +120,7 @@ const FlexboxSettings = (props: Props) => {
           placeholder="px"
           id="flexDirection"
           onChange={handleOnChanges}
-          value={state.editor.selectedElement.styles.flexDirection}
+          value={state.editor.selectedElement.styles.flexDirection || ""}
         />
       </div>
     </div>

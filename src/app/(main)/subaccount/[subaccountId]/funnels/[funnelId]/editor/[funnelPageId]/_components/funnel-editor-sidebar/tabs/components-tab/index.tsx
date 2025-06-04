@@ -17,6 +17,8 @@ import ContactFormComponentPlaceholder from "./placeholders/forms-ph/contact-for
 import CountdownPlaceholder from "./placeholders/interactive-ph/countdown-placeholder";
 import CheckoutPlaceholder from "./placeholders/buisness-ph/checkout-placeholder";
 import AudioPlaceholder from "./placeholders/media-ph/audio-placeholder";
+import DividerPlaceholder from "./placeholders/basic-ph/divider-placholder";
+import ListPlaceholder from "./placeholders/basic-ph/list-placeholder";
 
 type Props = {};
 
@@ -78,18 +80,18 @@ const ComponentsTab = (props: Props) => {
       id: "link",
       group: "basic",
     },
-    // {
-    //   Component: <DividerPlaceholder />,
-    //   label: "Divider",
-    //   id: "divider",
-    //   group: "basic",
-    // },
-    // {
-    //   Component: <ListPlaceholder />,
-    //   label: "List",
-    //   id: "list",
-    //   group: "basic",
-    // },
+    {
+      Component: <DividerPlaceholder />,
+      label: "Divider",
+      id: "divider",
+      group: "basic",
+    },
+    {
+      Component: <ListPlaceholder />,
+      label: "List",
+      id: "list",
+      group: "basic",
+    },
     // {
     //   Component: <IconPlaceholder />,
     //   label: "Icon",

@@ -10,6 +10,8 @@ import ImageComponent from "./media-component/image";
 import ButtonComponent from "./basic-component/button";
 import CountdownComponent from "./interactive-component/countdown";
 import AudioComponent from "./media-component/audio";
+import DividerComponent from "./basic-component/divider";
+import ListComponent from "./basic-component/list";
 
 type Props = {
   element: EditorElement;
@@ -52,6 +54,12 @@ const Recursive = ({ element }: Props) => {
 
     case "audio":
       return <AudioComponent element={element} />;
+
+    case "divider":
+      return <DividerComponent element={element} />;
+
+    case "list":
+      return <ListComponent element={element} />;
 
     default:
       return null;

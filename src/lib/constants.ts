@@ -226,6 +226,8 @@ export type EditorBtns =
   | "image"
   | "button"
   | "countdown"
+  | "divider"
+  | "list"
   | "audio"
   | null
   | "3Col";

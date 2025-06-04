@@ -261,6 +261,53 @@ const Container = ({ element }: Props) => {
           },
         });
         break;
+
+      case "divider":
+        dispatch({
+          type: "ADD_ELEMENT",
+          payload: {
+            containerId: id,
+            elementDetails: {
+              content: {
+                dividerStyle: "solid",
+                dividerColor: "#d1d5db",
+                dividerThickness: 1,
+              },
+              id: v4(),
+              name: "Divider",
+              styles: {
+                width: "100%",
+                margin: "10px 0",
+                ...defaultStyles,
+              },
+              type: "divider",
+            },
+          },
+        });
+        break;
+
+      case "list":
+        dispatch({
+          type: "ADD_ELEMENT",
+          payload: {
+            containerId: id,
+            elementDetails: {
+              content: {
+                items: ["List item 1", "List item 2", "List item 3"],
+                listType: "none",
+              },
+              id: v4(),
+              name: "List",
+              styles: {
+                color: "black",
+                padding: "10px",
+                ...defaultStyles,
+              },
+              type: "list",
+            },
+          },
+        });
+        break;
     }
   };
 
