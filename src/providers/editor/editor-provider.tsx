@@ -35,6 +35,17 @@ export type EditorElement = {
         // list
         items?: string[];
         listType?: "unordered" | "ordered" | "none";
+
+        // Icon
+        iconColor?: string;
+        iconSize?: number;
+        iconName?: string;
+
+        // 3-columns
+        columnGap?: number;
+        column1Width?: number;
+        column2Width?: number;
+        column3Width?: number;
       };
 };
 

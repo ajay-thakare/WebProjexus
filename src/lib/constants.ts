@@ -228,6 +228,7 @@ export type EditorBtns =
   | "countdown"
   | "divider"
   | "list"
+  | "icon"
   | "audio"
   | null
   | "3Col";

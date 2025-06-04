@@ -12,6 +12,8 @@ import CountdownComponent from "./interactive-component/countdown";
 import AudioComponent from "./media-component/audio";
 import DividerComponent from "./basic-component/divider";
 import ListComponent from "./basic-component/list";
+import IconComponent from "./basic-component/icon";
+import ThreeColumnComponent from "./layout-component/three-columns";
 
 type Props = {
   element: EditorElement;
@@ -60,6 +62,12 @@ const Recursive = ({ element }: Props) => {
 
     case "list":
       return <ListComponent element={element} />;
+
+    case "icon":
+      return <IconComponent element={element} />;
+
+    case "3Col":
+      return <Container element={element} />;
 
     default:
       return null;

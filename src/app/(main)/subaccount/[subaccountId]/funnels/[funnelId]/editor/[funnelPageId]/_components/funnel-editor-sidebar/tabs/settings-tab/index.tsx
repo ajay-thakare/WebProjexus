@@ -23,6 +23,8 @@ import FlexboxSettings from "./common-setting/flexbox-settings";
 import AudioSettings from "./component-specific-setting/media-settings/audio-settings";
 import DividerSettings from "./component-specific-setting/basic-settings/divider-settings";
 import ListSettings from "./component-specific-setting/basic-settings/list-settings";
+import IconSettings from "./component-specific-setting/basic-settings/icon-settings";
+import ThreeColumnSettings from "./component-specific-setting/layout-settings/three-columns-settings";
 
 type Props = {};
 
@@ -86,6 +88,16 @@ const SettingsTab = (props: Props) => {
           {state.editor.selectedElement.type === "list" &&
             !Array.isArray(state.editor.selectedElement.content) && (
               <ListSettings />
+            )}
+
+          {state.editor.selectedElement.type === "icon" &&
+            !Array.isArray(state.editor.selectedElement.content) && (
+              <IconSettings />
+            )}
+
+          {state.editor.selectedElement.type === "3Col" &&
+            !Array.isArray(state.editor.selectedElement.content) && (
+              <ThreeColumnSettings />
             )}
         </AccordionContent>
       </AccordionItem>

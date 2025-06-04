@@ -19,6 +19,8 @@ import CheckoutPlaceholder from "./placeholders/buisness-ph/checkout-placeholder
 import AudioPlaceholder from "./placeholders/media-ph/audio-placeholder";
 import DividerPlaceholder from "./placeholders/basic-ph/divider-placholder";
 import ListPlaceholder from "./placeholders/basic-ph/list-placeholder";
+import IconPlaceholder from "./placeholders/basic-ph/icon-placholder";
+import ThreeColumnPlaceholder from "./placeholders/layout-ph/three-columns-placeholder";
 
 type Props = {};
 
@@ -42,12 +44,12 @@ const ComponentsTab = (props: Props) => {
       id: "2Col",
       group: "layout",
     },
-    // {
-    //   Component: <SpacerPlaceholder />,
-    //   label: "3 Col",
-    //   id: "3Col",
-    //   group: "layout",
-    // },
+    {
+      Component: <ThreeColumnPlaceholder />,
+      label: "3 Col",
+      id: "3Col",
+      group: "layout",
+    },
     // {
     //   Component: <SpacerPlaceholder />,
     //   label: "Spacer",
@@ -92,12 +94,12 @@ const ComponentsTab = (props: Props) => {
       id: "list",
       group: "basic",
     },
-    // {
-    //   Component: <IconPlaceholder />,
-    //   label: "Icon",
-    //   id: "icon",
-    //   group: "basic",
-    // },
+    {
+      Component: <IconPlaceholder />,
+      label: "Icon",
+      id: "icon",
+      group: "basic",
+    },
 
     // Media Elements
     {

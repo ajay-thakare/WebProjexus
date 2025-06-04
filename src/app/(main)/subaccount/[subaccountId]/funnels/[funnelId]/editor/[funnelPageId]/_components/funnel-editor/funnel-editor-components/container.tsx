@@ -308,6 +308,92 @@ const Container = ({ element }: Props) => {
           },
         });
         break;
+
+      case "icon":
+        dispatch({
+          type: "ADD_ELEMENT",
+          payload: {
+            containerId: id,
+            elementDetails: {
+              content: {
+                iconName: "star",
+                iconSize: 24,
+                iconColor: "#6366f1",
+              },
+              id: v4(),
+              name: "Icon",
+              styles: {
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                width: "auto",
+                height: "auto",
+                padding: "10px",
+                ...defaultStyles,
+              },
+              type: "icon",
+            },
+          },
+        });
+        break;
+
+      case "3Col":
+        dispatch({
+          type: "ADD_ELEMENT",
+          payload: {
+            containerId: id,
+            elementDetails: {
+              content: [
+                {
+                  content: [],
+                  id: v4(),
+                  name: "Column 1",
+                  styles: {
+                    ...defaultStyles,
+                    width: "100%",
+                    minHeight: "100px",
+                  },
+                  type: "container",
+                },
+                {
+                  content: [],
+                  id: v4(),
+                  name: "Column 2",
+                  styles: {
+                    ...defaultStyles,
+                    width: "100%",
+                    minHeight: "100px",
+                  },
+                  type: "container",
+                },
+                {
+                  content: [],
+                  id: v4(),
+                  name: "Column 3",
+                  styles: {
+                    ...defaultStyles,
+                    width: "100%",
+                    minHeight: "100px",
+                  },
+                  type: "container",
+                },
+              ],
+              id: v4(),
+              name: "Three Column",
+              styles: {
+                display: "flex",
+                width: "100%",
+                minHeight: "150px",
+                padding: "20px",
+                backgroundColor: "transparent",
+                columnGap: "16px",
+                ...defaultStyles,
+              },
+              type: "3Col",
+            },
+          },
+        });
+        break;
     }
   };
 
