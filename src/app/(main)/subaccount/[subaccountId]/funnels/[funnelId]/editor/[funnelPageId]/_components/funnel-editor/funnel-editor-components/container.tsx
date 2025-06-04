@@ -410,6 +410,7 @@ const Container = ({ element }: Props) => {
               name: "Spacer",
               styles: {
                 width: "100%",
+                display: "block",
                 ...defaultStyles,
               },
               type: "spacer",
