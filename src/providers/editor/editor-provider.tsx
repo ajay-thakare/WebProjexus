@@ -57,7 +57,9 @@ export type EditorElement = {
         column1Width?: number;
         column2Width?: number;
         column3Width?: number;
-
+        column1Elements?: EditorElement[];
+        column2Elements?: EditorElement[];
+        column3Elements?: EditorElement[];
         // spacer
         spacerHeight?: number;
         spacerWidth?: string;

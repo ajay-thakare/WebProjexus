@@ -73,7 +73,7 @@ const Recursive = ({ element }: Props) => {
 
     case "spacer":
       return <SpacerComponent element={element} />;
-      
+
     case "tabs":
       return <TabsComponent element={element} />;
 
