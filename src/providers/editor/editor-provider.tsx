@@ -6,6 +6,17 @@ import { FunnelPage } from "@prisma/client";
 
 export type DeviceTypes = "Desktop" | "Mobile" | "Tablet";
 
+export interface TabItem {
+  id: string;
+  label: string;
+  content: string;
+  elements?: EditorElement[];
+  backgroundColor?: string;
+  textColor?: string;
+  activeBackgroundColor?: string;
+  activeTextColor?: string;
+}
+
 export type EditorElement = {
   id: string;
   styles: React.CSSProperties;
@@ -46,6 +57,17 @@ export type EditorElement = {
         column1Width?: number;
         column2Width?: number;
         column3Width?: number;
+
+        // spacer
+        spacerHeight?: number;
+        spacerWidth?: string;
+        spacerBackgroundColor?: string;
+
+        // tabs
+        tabs?: TabItem[];
+        tabsBackgroundColor?: string;
+        tabsHeaderBackgroundColor?: string;
+        tabsContentBackgroundColor?: string;
       };
 };
 

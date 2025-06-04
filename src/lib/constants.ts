@@ -230,6 +230,8 @@ export type EditorBtns =
   | "list"
   | "icon"
   | "audio"
+  | "spacer"
+  | "tabs"
   | null
   | "3Col";
 

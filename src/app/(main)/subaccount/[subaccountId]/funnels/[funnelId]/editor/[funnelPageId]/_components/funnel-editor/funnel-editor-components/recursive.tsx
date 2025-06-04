@@ -14,6 +14,8 @@ import DividerComponent from "./basic-component/divider";
 import ListComponent from "./basic-component/list";
 import IconComponent from "./basic-component/icon";
 import ThreeColumnComponent from "./layout-component/three-columns";
+import SpacerComponent from "./layout-component/spacer-component";
+import TabsComponent from "./layout-component/tabs-component";
 
 type Props = {
   element: EditorElement;
@@ -68,6 +70,12 @@ const Recursive = ({ element }: Props) => {
 
     case "3Col":
       return <Container element={element} />;
+
+    case "spacer":
+      return <SpacerComponent element={element} />;
+      
+    case "tabs":
+      return <TabsComponent element={element} />;
 
     default:
       return null;

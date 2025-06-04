@@ -21,6 +21,8 @@ import DividerPlaceholder from "./placeholders/basic-ph/divider-placholder";
 import ListPlaceholder from "./placeholders/basic-ph/list-placeholder";
 import IconPlaceholder from "./placeholders/basic-ph/icon-placholder";
 import ThreeColumnPlaceholder from "./placeholders/layout-ph/three-columns-placeholder";
+import SpacerPlaceholder from "./placeholders/layout-ph/spacer-placeholder";
+import TabsPlaceholder from "./placeholders/layout-ph/tabs-placeholder";
 
 type Props = {};
 
@@ -50,12 +52,19 @@ const ComponentsTab = (props: Props) => {
       id: "3Col",
       group: "layout",
     },
-    // {
-    //   Component: <SpacerPlaceholder />,
-    //   label: "Spacer",
-    //   id: "spacer",
-    //   group: "layout",
-    // },
+    {
+      Component: <SpacerPlaceholder />,
+      label: "Spacer",
+      id: "spacer",
+      group: "layout",
+    },
+    {
+      Component: <TabsPlaceholder />,
+      label: "Tabs",
+      id: "tabs",
+      group: "layout",
+    },
+
     // {
     //   Component: <GridPlaceholder />,
     //   label: "Grid",

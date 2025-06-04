@@ -25,6 +25,10 @@ import DividerSettings from "./component-specific-setting/basic-settings/divider
 import ListSettings from "./component-specific-setting/basic-settings/list-settings";
 import IconSettings from "./component-specific-setting/basic-settings/icon-settings";
 import ThreeColumnSettings from "./component-specific-setting/layout-settings/three-columns-settings";
+import SpacerSettings from "./component-specific-setting/layout-settings/spacer-settings";
+
+// Add this import at the top with the other component-specific settings imports
+import TabsSettings from "./component-specific-setting/layout-settings/tabs-settings";
 
 type Props = {};
 
@@ -98,6 +102,16 @@ const SettingsTab = (props: Props) => {
           {state.editor.selectedElement.type === "3Col" &&
             !Array.isArray(state.editor.selectedElement.content) && (
               <ThreeColumnSettings />
+            )}
+
+          {state.editor.selectedElement.type === "spacer" &&
+            !Array.isArray(state.editor.selectedElement.content) && (
+              <SpacerSettings />
+            )}
+
+          {state.editor.selectedElement.type === "tabs" &&
+            !Array.isArray(state.editor.selectedElement.content) && (
+              <TabsSettings />
             )}
         </AccordionContent>
       </AccordionItem>

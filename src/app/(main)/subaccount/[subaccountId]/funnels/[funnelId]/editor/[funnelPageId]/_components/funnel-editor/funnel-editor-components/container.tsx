@@ -394,6 +394,85 @@ const Container = ({ element }: Props) => {
           },
         });
         break;
+
+      case "spacer":
+        dispatch({
+          type: "ADD_ELEMENT",
+          payload: {
+            containerId: id,
+            elementDetails: {
+              content: {
+                spacerHeight: 50,
+                spacerWidth: "100%",
+                spacerBackgroundColor: "transparent",
+              },
+              id: v4(),
+              name: "Spacer",
+              styles: {
+                width: "100%",
+                ...defaultStyles,
+              },
+              type: "spacer",
+            },
+          },
+        });
+        break;
+
+      case "tabs":
+        dispatch({
+          type: "ADD_ELEMENT",
+          payload: {
+            containerId: id,
+            elementDetails: {
+              content: {
+                tabs: [
+                  {
+                    id: "tab1",
+                    label: "Tab 1",
+                    content: "Content for tab 1. Click to edit this text.",
+                    elements: [],
+                    backgroundColor: "#f1f5f9",
+                    textColor: "#64748b",
+                    activeBackgroundColor: "#ffffff",
+                    activeTextColor: "#3b82f6",
+                  },
+                  {
+                    id: "tab2",
+                    label: "Tab 2",
+                    content: "Content for tab 2. Click to edit this text.",
+                    elements: [],
+                    backgroundColor: "#f1f5f9",
+                    textColor: "#64748b",
+                    activeBackgroundColor: "#ffffff",
+                    activeTextColor: "#3b82f6",
+                  },
+                  {
+                    id: "tab3",
+                    label: "Tab 3",
+                    content: "Content for tab 3. Click to edit this text.",
+                    elements: [],
+                    backgroundColor: "#f1f5f9",
+                    textColor: "#64748b",
+                    activeBackgroundColor: "#ffffff",
+                    activeTextColor: "#3b82f6",
+                  },
+                ],
+                tabsBackgroundColor: "#ffffff",
+                tabsHeaderBackgroundColor: "#f8fafc",
+                tabsContentBackgroundColor: "#ffffff",
+              },
+              id: v4(),
+              name: "Tabs",
+              styles: {
+                width: "100%",
+                minHeight: "200px",
+                ...defaultStyles,
+              },
+              type: "tabs",
+            },
+          },
+        });
+        break;
     }
   };
 
