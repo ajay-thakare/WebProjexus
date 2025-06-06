@@ -22,6 +22,10 @@ import CheckboxComponent from "./forms-component/chkbox-component";
 import RadioComponent from "./forms-component/radio-component";
 import SelectComponent from "./forms-component/select-component";
 import FormComponent from "./forms-component/form-component";
+import EmbedComponent from "./interactive-component/embed-component";
+import SocialIconsComponent from "./interactive-component/socialIcons-componet";
+import PopupComponent from "./interactive-component/popup-component";
+import TooltipComponent from "./interactive-component/tooltip-component";
 
 type Props = {
   element: EditorElement;
@@ -100,6 +104,18 @@ const Recursive = ({ element }: Props) => {
 
     case "form":
       return <FormComponent element={element} />;
+
+    case "embed":
+      return <EmbedComponent element={element} />;
+
+    case "socialIcons":
+      return <SocialIconsComponent element={element} />;
+
+    case "popup":
+      return <PopupComponent element={element} />;
+
+    case "tooltip":
+      return <TooltipComponent element={element} />;
 
     default:
       return null;

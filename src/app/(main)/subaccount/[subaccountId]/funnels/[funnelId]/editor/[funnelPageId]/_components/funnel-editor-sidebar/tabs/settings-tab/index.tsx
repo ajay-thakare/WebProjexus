@@ -35,6 +35,10 @@ import CheckboxSettings from "./component-specific-setting/forms-settings/chkbox
 import RadioSettings from "./component-specific-setting/forms-settings/radio-settings";
 import SelectSettings from "./component-specific-setting/forms-settings/select-settings";
 import FormSettings from "./component-specific-setting/forms-settings/form-settings";
+import EmbedSettings from "./component-specific-setting/interactive-settings/embed-settings";
+import SocialIconsSettings from "./component-specific-setting/interactive-settings/socialIcons-settings";
+import PopupSettings from "./component-specific-setting/interactive-settings/popup-settings";
+import TooltipSettings from "./component-specific-setting/interactive-settings/tooltip-settings";
 
 type Props = {};
 
@@ -146,6 +150,26 @@ const SettingsTab = (props: Props) => {
             )}
 
           {state.editor.selectedElement.type === "form" && <FormSettings />}
+
+          {state.editor.selectedElement.type === "embed" &&
+            !Array.isArray(state.editor.selectedElement.content) && (
+              <EmbedSettings />
+            )}
+
+          {state.editor.selectedElement.type === "socialIcons" &&
+            !Array.isArray(state.editor.selectedElement.content) && (
+              <SocialIconsSettings />
+            )}
+
+          {state.editor.selectedElement.type === "popup" &&
+            !Array.isArray(state.editor.selectedElement.content) && (
+              <PopupSettings />
+            )}
+
+          {state.editor.selectedElement.type === "tooltip" &&
+            !Array.isArray(state.editor.selectedElement.content) && (
+              <TooltipSettings />
+            )}
         </AccordionContent>
       </AccordionItem>
 

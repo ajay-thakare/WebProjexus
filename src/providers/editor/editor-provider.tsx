@@ -120,8 +120,8 @@ export type EditorElement = {
         resize?: string;
 
         // checkbox
-        size?: string;
-        layout?: string;
+        // size?: string;
+        // layout?: string;
         checkboxColor?: string;
         focusColor?: string;
         checked?: boolean;
@@ -135,6 +135,136 @@ export type EditorElement = {
 
         // select
         multiple?: boolean;
+
+        // embed/code properties
+        embedType?: "custom" | "iframe" | "youtube" | "script";
+        embedCode?: string;
+        iframeSrc?: string;
+        allowFullscreen?: boolean;
+        sandbox?: string;
+        width?: string;
+        height?: string;
+        loading?: "lazy" | "eager";
+        allowScripts?: boolean;
+        showPreview?: boolean;
+
+        // social Icons
+        socialLinks?: Array<{
+          id: string;
+          platform: string;
+          url: string;
+          label: string;
+        }>;
+        iconSpacing?: number;
+        layout?: "horizontal" | "vertical" | "grid" | string;
+        style?: "filled" | "outlined" | "minimal" | "rounded";
+        hoverColor?: string;
+        borderRadius?: number;
+        showLabels?: boolean;
+        openInNewTab?: boolean;
+        hoverEffect?: "none" | "scale" | "bounce" | "fade" | "slide";
+        alignment?: "left" | "center" | "right";
+        customColors?: boolean;
+
+        // popup/modal properties
+        triggerType?: "click" | "hover" | "auto" | "scroll" | "time" | "exit";
+        triggerText?: string;
+        popupTitle?: string;
+        popupContent?: string;
+        popupSize?: "small" | "medium" | "large" | "fullscreen" | "custom";
+        position?:
+          | "center"
+          | "top"
+          | "bottom"
+          | "left"
+          | "right"
+          | "top-left"
+          | "top-right"
+          | "bottom-left"
+          | "bottom-right";
+        animation?:
+          | "fadeIn"
+          | "slideUp"
+          | "slideDown"
+          | "slideLeft"
+          | "slideRight"
+          | "zoomIn"
+          | "bounce"
+          | "flip";
+        overlay?: boolean;
+        closeOnOverlay?: boolean;
+        closeOnEscape?: boolean;
+        showCloseButton?: boolean;
+        autoClose?: boolean;
+        autoCloseDelay?: number;
+        // popup-Trigger settings
+        scrollTrigger?: boolean;
+        scrollPercentage?: number;
+        timeTrigger?: boolean;
+        timeDelay?: number;
+        exitIntentTrigger?: boolean;
+        // popup-Style settings
+        overlayColor?: string;
+        padding?: number;
+        maxWidth?: number;
+        maxHeight?: number;
+        // popup-Button styles
+        triggerButtonStyle?:
+          | "primary"
+          | "secondary"
+          | "outline"
+          | "ghost"
+          | "link";
+        triggerButtonColor?: string;
+        triggerButtonTextColor?: string;
+
+        // Add these properties to your EditorElement content type union in editor-provider.tsx:
+
+        // tooltip properties
+        tooltipContent?: string;
+        triggerTypee?: "hover" | "click" | "focus" | "manual";
+        positionn?:
+          | "top"
+          | "bottom"
+          | "left"
+          | "right"
+          | "top-start"
+          | "top-end"
+          | "bottom-start"
+          | "bottom-end"
+          | "left-start"
+          | "left-end"
+          | "right-start"
+          | "right-end";
+        theme?:
+          | "dark"
+          | "light"
+          | "warning"
+          | "error"
+          | "success"
+          | "info"
+          | "custom";
+        size?: "small" | "medium" | "large" | "custom" | string;
+        animationn?:
+          | "fade"
+          | "scale"
+          | "shift"
+          | "perspective"
+          | "slide"
+          | "none";
+        arrow?: boolean;
+        delay?: number;
+        hideDelay?: number;
+        offset?: number;
+        followCursor?: boolean;
+        interactive?: boolean;
+        multiline?: boolean;
+        // Custom styling for tooltips
+        customStyle?: boolean;
+        fontSize?: number;
+        // Trigger element styling
+        triggerStyle?: "button" | "text" | "icon" | "badge" | "link";
+        triggerUnderline?: boolean;
       };
 };
 

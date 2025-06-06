@@ -29,6 +29,10 @@ import RadioPlaceholder from "./placeholders/forms-ph/radio-placeholder";
 import CheckboxPlaceholder from "./placeholders/forms-ph/chkbox-placeholder";
 import SelectPlaceholder from "./placeholders/forms-ph/select-placeholder";
 import FormPlaceholder from "./placeholders/forms-ph/form-placeholder";
+import EmbedPlaceholder from "./placeholders/interactive-ph/embed-placeholder";
+import SocialIconsPlaceholder from "./placeholders/interactive-ph/socialIcons-placeholder";
+import PopupPlaceholder from "./placeholders/interactive-ph/popup-placeholder";
+import TooltipPlaceholder from "./placeholders/interactive-ph/tooltip-placeholder";
 
 type Props = {};
 
@@ -193,30 +197,30 @@ const ComponentsTab = (props: Props) => {
       id: "countdown",
       group: "interactive",
     },
-    // {
-    //   Component: <EmbedPlaceholder />,
-    //   label: "Embed/Code",
-    //   id: "embed",
-    //   group: "interactive",
-    // },
-    // {
-    //   Component: <SocialIconsPlaceholder />,
-    //   label: "Social Icons",
-    //   id: "socialIcons",
-    //   group: "interactive",
-    // },
-    // {
-    //   Component: <PopupPlaceholder />,
-    //   label: "Popup/Modal",
-    //   id: "popup",
-    //   group: "interactive",
-    // },
-    // {
-    //   Component: <TabsPlaceholder />,
-    //   label: "Tabs",
-    //   id: "tabs",
-    //   group: "interactive",
-    // },
+    {
+      Component: <EmbedPlaceholder />,
+      label: "Embed",
+      id: "embed",
+      group: "interactive",
+    },
+    {
+      Component: <SocialIconsPlaceholder />,
+      label: "SocialIcons",
+      id: "socialIcons",
+      group: "interactive",
+    },
+    {
+      Component: <PopupPlaceholder />,
+      label: "Popup",
+      id: "popup",
+      group: "interactive",
+    },
+    {
+      Component: <TooltipPlaceholder />,
+      label: "Tooltip",
+      id: "tooltip",
+      group: "interactive",
+    },
     // {
     //   Component: <AccordionPlaceholder />,
     //   label: "Accordion",

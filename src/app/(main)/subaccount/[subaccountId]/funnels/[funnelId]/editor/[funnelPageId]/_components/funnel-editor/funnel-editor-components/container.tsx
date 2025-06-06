@@ -714,6 +714,212 @@ const Container = ({ element }: Props) => {
           },
         });
         break;
+
+      case "embed":
+        dispatch({
+          type: "ADD_ELEMENT",
+          payload: {
+            containerId: id,
+            elementDetails: {
+              content: {
+                embedType: "custom",
+                embedCode: `<div style="padding: 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; text-align: center; border-radius: 8px;">
+  <h3 style="margin: 0 0 10px 0;">Custom Embed Content</h3>
+  <p style="margin: 0;">Click to edit this embed and add your own HTML, CSS, or JavaScript!</p>
+</div>`,
+                iframeSrc: "",
+                allowFullscreen: false,
+                sandbox: "",
+                width: "100%",
+                height: "300px",
+                loading: "lazy",
+                allowScripts: false,
+                showPreview: true,
+              },
+              id: v4(),
+              name: "Embed",
+              styles: {
+                width: "100%",
+                minHeight: "300px",
+                margin: "20px 0",
+                ...defaultStyles,
+              },
+              type: "embed",
+            },
+          },
+        });
+        break;
+
+      case "socialIcons":
+        dispatch({
+          type: "ADD_ELEMENT",
+          payload: {
+            containerId: id,
+            elementDetails: {
+              content: {
+                socialLinks: [
+                  {
+                    id: "1",
+                    platform: "facebook",
+                    url: "https://facebook.com/yourpage",
+                    label: "Facebook",
+                  },
+                  {
+                    id: "2",
+                    platform: "twitter",
+                    url: "https://twitter.com/yourhandle",
+                    label: "Twitter",
+                  },
+                  {
+                    id: "3",
+                    platform: "instagram",
+                    url: "https://instagram.com/yourprofile",
+                    label: "Instagram",
+                  },
+                  {
+                    id: "4",
+                    platform: "linkedin",
+                    url: "https://linkedin.com/company/yourcompany",
+                    label: "LinkedIn",
+                  },
+                ],
+                iconSize: 24,
+                iconSpacing: 16,
+                layout: "horizontal",
+                style: "filled",
+                borderRadius: 8,
+                showLabels: false,
+                openInNewTab: true,
+                hoverEffect: "scale",
+                alignment: "center",
+                customColors: false,
+                iconColor: "#ffffff",
+                backgroundColor: "#3b82f6",
+                hoverColor: "#2563eb",
+                labelColor: "#374151",
+              },
+              id: v4(),
+              name: "Social Icons",
+              styles: {
+                width: "100%",
+                margin: "20px 0",
+                ...defaultStyles,
+              },
+              type: "socialIcons",
+            },
+          },
+        });
+        break;
+
+      case "popup":
+        dispatch({
+          type: "ADD_ELEMENT",
+          payload: {
+            containerId: id,
+            elementDetails: {
+              content: {
+                triggerType: "click",
+                triggerText: "Open Popup",
+                popupTitle: "Welcome!",
+                popupContent: `<h3>Special Offer!</h3>
+<p>Get 20% off your first order when you sign up for our newsletter.</p>
+<p>Don't miss out on this exclusive deal!</p>`,
+                popupSize: "medium",
+                position: "center",
+                animation: "fadeIn",
+                overlay: true,
+                closeOnOverlay: true,
+                closeOnEscape: true,
+                showCloseButton: true,
+                autoClose: false,
+                autoCloseDelay: 5000,
+
+                // Trigger settings
+                scrollTrigger: false,
+                scrollPercentage: 50,
+                timeTrigger: false,
+                timeDelay: 3000,
+                exitIntentTrigger: false,
+
+                // Style settings
+                backgroundColor: "#ffffff",
+                textColor: "#111827",
+                overlayColor: "rgba(0, 0, 0, 0.5)",
+                borderRadius: 8,
+                padding: 24,
+                maxWidth: 600,
+                maxHeight: 400,
+
+                // Button styles
+                triggerButtonStyle: "primary",
+                triggerButtonColor: "#3b82f6",
+                triggerButtonTextColor: "#ffffff",
+              },
+              id: v4(),
+              name: "Popup",
+              styles: {
+                width: "100%",
+                margin: "20px 0",
+                ...defaultStyles,
+              },
+              type: "popup",
+            },
+          },
+        });
+        break;
+
+      case "tooltip":
+        dispatch({
+          type: "ADD_ELEMENT",
+          payload: {
+            containerId: id,
+            elementDetails: {
+              content: {
+                triggerText: "Hover for info",
+                tooltipContent:
+                  "This is a helpful tooltip that provides additional information to users.",
+                triggerTypee: "hover",
+                positionn: "top",
+                theme: "dark",
+                size: "medium",
+                animationn: "fade",
+                arrow: true,
+                delay: 0,
+                hideDelay: 0,
+                maxWidth: 200,
+                offset: 8,
+                followCursor: false,
+                interactive: false,
+                multiline: false,
+
+                // Custom styling
+                customStyle: false,
+                backgroundColor: "#1f2937",
+                textColor: "#ffffff",
+                borderColor: "#374151",
+                borderRadius: 6,
+                fontSize: 14,
+                padding: 8,
+
+                // Trigger element styling
+                triggerStyle: "button",
+                triggerButtonColor: "#3b82f6",
+                triggerButtonTextColor: "#ffffff",
+                triggerUnderline: false,
+              },
+              id: v4(),
+              name: "Tooltip",
+              styles: {
+                width: "auto",
+                display: "inline-block",
+                margin: "10px",
+                ...defaultStyles,
+              },
+              type: "tooltip",
+            },
+          },
+        });
+        break;
     }
   };
 
