@@ -22,6 +22,31 @@ export type EditorElement = {
   styles: React.CSSProperties;
   name: string;
   type: EditorBtns;
+  formProps?: {
+    formTitle?: string;
+    formDescription?: string;
+    action?: string;
+    method?: "GET" | "POST" | "PUT" | "PATCH";
+    enctype?:
+      | "application/x-www-form-urlencoded"
+      | "multipart/form-data"
+      | "text/plain";
+    target?: "_self" | "_blank" | "_parent" | "_top";
+    submitButtonText?: string;
+    resetButtonText?: string;
+    showResetButton?: boolean;
+    successMessage?: string;
+    errorMessage?: string;
+    novalidate?: boolean;
+    backgroundColor?: string;
+    borderColor?: string;
+    titleColor?: string;
+    descriptionColor?: string;
+    submitButtonColor?: string;
+    submitButtonTextColor?: string;
+    resetButtonColor?: string;
+    resetButtonTextColor?: string;
+  };
   content:
     | EditorElement[]
     | {
@@ -70,6 +95,46 @@ export type EditorElement = {
         tabsBackgroundColor?: string;
         tabsHeaderBackgroundColor?: string;
         tabsContentBackgroundColor?: string;
+
+        // Input
+        inputType?: string;
+        placeholder?: string;
+        label?: string;
+        required?: boolean;
+        disabled?: boolean;
+        value?: string;
+        name?: string;
+        helperText?: string;
+        errorText?: string;
+        backgroundColor?: string;
+        textColor?: string;
+        borderColor?: string;
+        focusBorderColor?: string;
+        labelColor?: string;
+        placeholderColor?: string;
+
+        // textarea
+        rows?: number;
+        maxLength?: number;
+        minLength?: number;
+        resize?: string;
+
+        // checkbox
+        size?: string;
+        layout?: string;
+        checkboxColor?: string;
+        focusColor?: string;
+        checked?: boolean;
+
+        // radio
+        groupLabel?: string;
+        selectedValue?: string;
+        options?: { id: string; label: string; value: string }[];
+        radioColor?: string;
+        groupLabelColor?: string;
+
+        // select
+        multiple?: boolean;
       };
 };
 

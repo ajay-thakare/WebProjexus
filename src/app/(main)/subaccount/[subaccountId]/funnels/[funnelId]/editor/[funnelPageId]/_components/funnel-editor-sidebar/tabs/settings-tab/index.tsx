@@ -29,6 +29,12 @@ import SpacerSettings from "./component-specific-setting/layout-settings/spacer-
 
 // Add this import at the top with the other component-specific settings imports
 import TabsSettings from "./component-specific-setting/layout-settings/tabs-settings";
+import InputSettings from "./component-specific-setting/forms-settings/input-settings";
+import TextareaSettings from "./component-specific-setting/forms-settings/text-area-settings";
+import CheckboxSettings from "./component-specific-setting/forms-settings/chkbox-settings";
+import RadioSettings from "./component-specific-setting/forms-settings/radio-settings";
+import SelectSettings from "./component-specific-setting/forms-settings/select-settings";
+import FormSettings from "./component-specific-setting/forms-settings/form-settings";
 
 type Props = {};
 
@@ -113,6 +119,33 @@ const SettingsTab = (props: Props) => {
             !Array.isArray(state.editor.selectedElement.content) && (
               <TabsSettings />
             )}
+
+          {state.editor.selectedElement.type === "input" &&
+            !Array.isArray(state.editor.selectedElement.content) && (
+              <InputSettings />
+            )}
+
+          {state.editor.selectedElement.type === "textarea" &&
+            !Array.isArray(state.editor.selectedElement.content) && (
+              <TextareaSettings />
+            )}
+
+          {state.editor.selectedElement.type === "checkbox" &&
+            !Array.isArray(state.editor.selectedElement.content) && (
+              <CheckboxSettings />
+            )}
+
+          {state.editor.selectedElement.type === "radio" &&
+            !Array.isArray(state.editor.selectedElement.content) && (
+              <RadioSettings />
+            )}
+
+          {state.editor.selectedElement.type === "select" &&
+            !Array.isArray(state.editor.selectedElement.content) && (
+              <SelectSettings />
+            )}
+
+          {state.editor.selectedElement.type === "form" && <FormSettings />}
         </AccordionContent>
       </AccordionItem>
 

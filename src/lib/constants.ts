@@ -232,6 +232,12 @@ export type EditorBtns =
   | "audio"
   | "spacer"
   | "tabs"
+  | "input"
+  | "textarea"
+  | "checkbox"
+  | "radio"
+  | "select"
+  | "form"
   | null
   | "3Col";
 

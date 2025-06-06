@@ -474,6 +474,246 @@ const Container = ({ element }: Props) => {
           },
         });
         break;
+
+      case "input":
+        dispatch({
+          type: "ADD_ELEMENT",
+          payload: {
+            containerId: id,
+            elementDetails: {
+              content: {
+                inputType: "text",
+                placeholder: "Enter text...",
+                label: "Input Label",
+                required: false,
+                disabled: false,
+                value: "",
+                name: "",
+                helperText: "",
+                errorText: "",
+
+                backgroundColor: "#ffffff",
+                textColor: "#111827",
+                borderColor: "#d1d5db",
+                focusBorderColor: "#3b82f6",
+                labelColor: "#374151",
+                placeholderColor: "#9ca3af",
+              },
+              id: v4(),
+              name: "Input",
+              styles: {
+                width: "100%",
+                margin: "10px 0",
+                ...defaultStyles,
+              },
+              type: "input",
+            },
+          },
+        });
+        break;
+
+      case "textarea":
+        dispatch({
+          type: "ADD_ELEMENT",
+          payload: {
+            containerId: id,
+            elementDetails: {
+              content: {
+                placeholder: "Enter your message...",
+                label: "Message",
+                required: false,
+                disabled: false,
+                value: "",
+                name: "",
+                rows: 4,
+                maxLength: 500,
+                minLength: 0,
+                helperText: "",
+                errorText: "",
+                resize: "vertical",
+                backgroundColor: "#ffffff",
+                textColor: "#111827",
+                borderColor: "#d1d5db",
+                focusBorderColor: "#3b82f6",
+                labelColor: "#374151",
+                placeholderColor: "#9ca3af",
+              },
+              id: v4(),
+              name: "Textarea",
+              styles: {
+                width: "100%",
+                margin: "10px 0",
+                ...defaultStyles,
+              },
+              type: "textarea",
+            },
+          },
+        });
+        break;
+
+      case "checkbox":
+        dispatch({
+          type: "ADD_ELEMENT",
+          payload: {
+            containerId: id,
+            elementDetails: {
+              content: {
+                label: "Checkbox Option",
+                required: false,
+                disabled: false,
+                checked: false,
+                name: "",
+                value: "",
+                helperText: "",
+                errorText: "",
+                size: "medium",
+                layout: "horizontal",
+                // Default colors
+                checkboxColor: "#3b82f6",
+                labelColor: "#374151",
+                borderColor: "#d1d5db",
+                focusColor: "#3b82f6",
+              },
+              id: v4(),
+              name: "Checkbox",
+              styles: {
+                width: "100%",
+                margin: "10px 0",
+                ...defaultStyles,
+              },
+              type: "checkbox",
+            },
+          },
+        });
+        break;
+
+      case "radio":
+        dispatch({
+          type: "ADD_ELEMENT",
+          payload: {
+            containerId: id,
+            elementDetails: {
+              content: {
+                groupLabel: "Radio Group",
+                required: false,
+                disabled: false,
+                selectedValue: "",
+                name: "",
+                helperText: "",
+                errorText: "",
+                size: "medium",
+                layout: "vertical",
+                options: [
+                  { id: "option1", label: "Option 1", value: "option1" },
+                  { id: "option2", label: "Option 2", value: "option2" },
+                  { id: "option3", label: "Option 3", value: "option3" },
+                ],
+                // Default colors
+                radioColor: "#3b82f6",
+                labelColor: "#374151",
+                groupLabelColor: "#111827",
+                borderColor: "#d1d5db",
+                focusColor: "#3b82f6",
+              },
+              id: v4(),
+              name: "Radio Group",
+              styles: {
+                width: "100%",
+                margin: "10px 0",
+                ...defaultStyles,
+              },
+              type: "radio",
+            },
+          },
+        });
+        break;
+
+      case "select":
+        dispatch({
+          type: "ADD_ELEMENT",
+          payload: {
+            containerId: id,
+            elementDetails: {
+              content: {
+                label: "Select Option",
+                placeholder: "Choose an option...",
+                required: false,
+                disabled: false,
+                selectedValue: "",
+                name: "",
+                helperText: "",
+                errorText: "",
+                multiple: false,
+                size: "medium",
+                options: [
+                  { id: "option1", label: "Option 1", value: "option1" },
+                  { id: "option2", label: "Option 2", value: "option2" },
+                  { id: "option3", label: "Option 3", value: "option3" },
+                ],
+                // Default colors
+                backgroundColor: "#ffffff",
+                textColor: "#111827",
+                borderColor: "#d1d5db",
+                focusBorderColor: "#3b82f6",
+                labelColor: "#374151",
+                placeholderColor: "#9ca3af",
+              },
+              id: v4(),
+              name: "Select",
+              styles: {
+                width: "100%",
+                margin: "10px 0",
+                ...defaultStyles,
+              },
+              type: "select",
+            },
+          },
+        });
+        break;
+
+      case "form":
+        dispatch({
+          type: "ADD_ELEMENT",
+          payload: {
+            containerId: id,
+            elementDetails: {
+              content: [],
+              id: v4(),
+              name: "Form",
+              styles: {
+                width: "100%",
+                minHeight: "300px",
+                margin: "20px 0",
+                ...defaultStyles,
+              },
+              type: "form",
+              formProps: {
+                formTitle: "Contact Form",
+                formDescription:
+                  "Please fill out this form to get in touch with us",
+                action: "",
+                method: "POST",
+                enctype: "application/x-www-form-urlencoded",
+                target: "_self",
+                submitButtonText: "Submit",
+                resetButtonText: "Reset",
+                showResetButton: false,
+                successMessage: "Form submitted successfully!",
+                errorMessage: "Please fix the errors and try again.",
+                novalidate: false,
+                backgroundColor: "#ffffff",
+                borderColor: "#e5e7eb",
+                titleColor: "#111827",
+                descriptionColor: "#6b7280",
+                submitButtonColor: "#3b82f6",
+                submitButtonTextColor: "#ffffff",
+                resetButtonColor: "#6b7280",
+                resetButtonTextColor: "#ffffff",
+              },
+            },
+          },
+        });
+        break;
     }
   };
 

@@ -16,6 +16,12 @@ import IconComponent from "./basic-component/icon";
 import ThreeColumnComponent from "./layout-component/three-columns";
 import SpacerComponent from "./layout-component/spacer-component";
 import TabsComponent from "./layout-component/tabs-component";
+import InputComponent from "./forms-component/input-component";
+import TextareaComponent from "./forms-component/text-area-component";
+import CheckboxComponent from "./forms-component/chkbox-component";
+import RadioComponent from "./forms-component/radio-component";
+import SelectComponent from "./forms-component/select-component";
+import FormComponent from "./forms-component/form-component";
 
 type Props = {
   element: EditorElement;
@@ -76,6 +82,24 @@ const Recursive = ({ element }: Props) => {
 
     case "tabs":
       return <TabsComponent element={element} />;
+
+    case "input":
+      return <InputComponent element={element} />;
+
+    case "textarea":
+      return <TextareaComponent element={element} />;
+
+    case "checkbox":
+      return <CheckboxComponent element={element} />;
+
+    case "radio":
+      return <RadioComponent element={element} />;
+
+    case "select":
+      return <SelectComponent element={element} />;
+
+    case "form":
+      return <FormComponent element={element} />;
 
     default:
       return null;

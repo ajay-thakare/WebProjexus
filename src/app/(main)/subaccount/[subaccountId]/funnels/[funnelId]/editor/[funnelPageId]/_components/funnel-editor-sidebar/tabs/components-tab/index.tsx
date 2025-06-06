@@ -23,6 +23,12 @@ import IconPlaceholder from "./placeholders/basic-ph/icon-placholder";
 import ThreeColumnPlaceholder from "./placeholders/layout-ph/three-columns-placeholder";
 import SpacerPlaceholder from "./placeholders/layout-ph/spacer-placeholder";
 import TabsPlaceholder from "./placeholders/layout-ph/tabs-placeholder";
+import InputPlaceholder from "./placeholders/forms-ph/input-placeholder";
+import TextareaPlaceholder from "./placeholders/forms-ph/text-area-placeholder";
+import RadioPlaceholder from "./placeholders/forms-ph/radio-placeholder";
+import CheckboxPlaceholder from "./placeholders/forms-ph/chkbox-placeholder";
+import SelectPlaceholder from "./placeholders/forms-ph/select-placeholder";
+import FormPlaceholder from "./placeholders/forms-ph/form-placeholder";
 
 type Props = {};
 
@@ -138,35 +144,47 @@ const ComponentsTab = (props: Props) => {
 
     // Forms Elements
     {
+      Component: <InputPlaceholder />,
+      label: "Input",
+      id: "input",
+      group: "forms",
+    },
+    {
+      Component: <TextareaPlaceholder />,
+      label: "Textarea",
+      id: "textarea",
+      group: "forms",
+    },
+    {
+      Component: <CheckboxPlaceholder />,
+      label: "Chkbox",
+      id: "checkbox",
+      group: "forms",
+    },
+    {
+      Component: <RadioPlaceholder />,
+      label: "Radio",
+      id: "radio",
+      group: "forms",
+    },
+    {
+      Component: <SelectPlaceholder />,
+      label: "Select",
+      id: "select",
+      group: "forms",
+    },
+    {
+      Component: <FormPlaceholder />,
+      label: "Form",
+      id: "form",
+      group: "forms",
+    },
+    {
       Component: <ContactFormComponentPlaceholder />,
       label: "Contact Form",
       id: "contactForm",
       group: "forms",
     },
-    // {
-    //   Component: <InputPlaceholder />,
-    //   label: "Input",
-    //   id: "input",
-    //   group: "forms",
-    // },
-    // {
-    //   Component: <TextareaPlaceholder />,
-    //   label: "Textarea",
-    //   id: "textarea",
-    //   group: "forms",
-    // },
-    // {
-    //   Component: <CheckboxPlaceholder />,
-    //   label: "Checkbox",
-    //   id: "checkbox",
-    //   group: "forms",
-    // },
-    // {
-    //   Component: <SelectPlaceholder />,
-    //   label: "Select",
-    //   id: "select",
-    //   group: "forms",
-    // },
 
     // Interactive Elements
     {
