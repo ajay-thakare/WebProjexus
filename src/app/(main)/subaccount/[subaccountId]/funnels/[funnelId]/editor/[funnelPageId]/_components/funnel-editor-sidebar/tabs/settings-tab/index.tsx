@@ -14,20 +14,12 @@ import LinkSettings from "./component-specific-setting/basic-settings/link-setti
 import ImageSettings from "./component-specific-setting/media-settings/image-settings";
 import VideoSettings from "./component-specific-setting/media-settings/video-settings";
 import CountdownSettings from "./component-specific-setting/interactive-settings/countdown-settings";
-
-// Import common settings
-import TypographySettings from "./common-setting/typography-settings";
-import DimensionsSettings from "./common-setting/dimensions-settings";
-import DecorationsSettings from "./common-setting/decorations-settings";
-import FlexboxSettings from "./common-setting/flexbox-settings";
 import AudioSettings from "./component-specific-setting/media-settings/audio-settings";
 import DividerSettings from "./component-specific-setting/basic-settings/divider-settings";
 import ListSettings from "./component-specific-setting/basic-settings/list-settings";
 import IconSettings from "./component-specific-setting/basic-settings/icon-settings";
 import ThreeColumnSettings from "./component-specific-setting/layout-settings/three-columns-settings";
 import SpacerSettings from "./component-specific-setting/layout-settings/spacer-settings";
-
-// Add this import at the top with the other component-specific settings imports
 import TabsSettings from "./component-specific-setting/layout-settings/tabs-settings";
 import InputSettings from "./component-specific-setting/forms-settings/input-settings";
 import TextareaSettings from "./component-specific-setting/forms-settings/text-area-settings";
@@ -39,6 +31,14 @@ import EmbedSettings from "./component-specific-setting/interactive-settings/emb
 import SocialIconsSettings from "./component-specific-setting/interactive-settings/socialIcons-settings";
 import PopupSettings from "./component-specific-setting/interactive-settings/popup-settings";
 import TooltipSettings from "./component-specific-setting/interactive-settings/tooltip-settings";
+import TestimonialSettings from "./component-specific-setting/business-settings/testimonial-settings";
+import ContactForm1Settings from "./component-specific-setting/business-settings/contactForm1-settings";
+
+// Import common settings
+import TypographySettings from "./common-setting/typography-settings";
+import DimensionsSettings from "./common-setting/dimensions-settings";
+import DecorationsSettings from "./common-setting/decorations-settings";
+import FlexboxSettings from "./common-setting/flexbox-settings";
 
 type Props = {};
 
@@ -169,6 +169,15 @@ const SettingsTab = (props: Props) => {
           {state.editor.selectedElement.type === "tooltip" &&
             !Array.isArray(state.editor.selectedElement.content) && (
               <TooltipSettings />
+            )}
+
+          {state.editor.selectedElement.type === "testimonial" &&
+            !Array.isArray(state.editor.selectedElement.content) && (
+              <TestimonialSettings />
+            )}
+          {state.editor.selectedElement.type === "contactForm1" &&
+            !Array.isArray(state.editor.selectedElement.content) && (
+              <ContactForm1Settings />
             )}
         </AccordionContent>
       </AccordionItem>

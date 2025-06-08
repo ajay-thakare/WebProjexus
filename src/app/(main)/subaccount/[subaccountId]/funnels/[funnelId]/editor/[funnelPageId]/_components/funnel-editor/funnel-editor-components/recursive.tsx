@@ -26,6 +26,8 @@ import EmbedComponent from "./interactive-component/embed-component";
 import SocialIconsComponent from "./interactive-component/socialIcons-componet";
 import PopupComponent from "./interactive-component/popup-component";
 import TooltipComponent from "./interactive-component/tooltip-component";
+import TestimonialComponent from "./business-component/testimonial";
+import ContactForm1Component from "./business-component/contactForm1";
 
 type Props = {
   element: EditorElement;
@@ -116,6 +118,12 @@ const Recursive = ({ element }: Props) => {
 
     case "tooltip":
       return <TooltipComponent element={element} />;
+
+    case "testimonial":
+      return <TestimonialComponent element={element} />;
+
+    case "contactForm1":
+      return <ContactForm1Component element={element} />;
 
     default:
       return null;

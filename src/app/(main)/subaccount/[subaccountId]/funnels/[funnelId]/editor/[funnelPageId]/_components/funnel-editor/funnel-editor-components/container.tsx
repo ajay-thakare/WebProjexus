@@ -920,6 +920,187 @@ const Container = ({ element }: Props) => {
           },
         });
         break;
+
+      case "testimonial":
+        dispatch({
+          type: "ADD_ELEMENT",
+          payload: {
+            containerId: id,
+            elementDetails: {
+              content: {
+                testimonials: [
+                  {
+                    id: "1",
+                    quote:
+                      "This product has completely transformed our business. The results exceeded our expectations and we've seen a 200% increase in productivity!",
+                    author: "Sarah Johnson",
+                    position: "CEO",
+                    company: "Tech Innovations Inc.",
+                    avatar: "https://placehold.co/80x80/4f46e5/ffffff?text=SJ",
+                    rating: 5,
+                  },
+                  {
+                    id: "2",
+                    quote:
+                      "Outstanding service and support. The team went above and beyond to ensure our success. Highly recommend to anyone looking for quality solutions.",
+                    author: "Michael Chen",
+                    position: "Product Manager",
+                    company: "Digital Solutions Ltd.",
+                    avatar: "https://placehold.co/80x80/059669/ffffff?text=MC",
+                    rating: 5,
+                  },
+                  {
+                    id: "3",
+                    quote:
+                      "User-friendly, powerful, and reliable. This tool has become an essential part of our daily workflow. Couldn't imagine working without it now.",
+                    author: "Emily Rodriguez",
+                    position: "Operations Director",
+                    company: "Growth Partners",
+                    avatar: "https://placehold.co/80x80/dc2626/ffffff?text=ER",
+                    rating: 4,
+                  },
+                ],
+                layoutt: "card",
+                stylee: "modern",
+                showAvatar: true,
+                showRating: true,
+                showQuotes: true,
+                showCompany: true,
+                autoplay: false,
+                autoplaySpeed: 5000,
+                showNavigation: true,
+                showDots: true,
+                itemsPerView: 1,
+
+                // Styling
+                backgroundColor: "#ffffff",
+                textColor: "#111827",
+                quoteColor: "#6b7280",
+                authorColor: "#111827",
+                positionColor: "#6b7280",
+                cardBackground: "#f9fafb",
+                cardBorder: "#e5e7eb",
+                ratingColor: "#fbbf24",
+                borderRadius: 12,
+                padding: 24,
+                spacing: 16,
+              },
+              id: v4(),
+              name: "Testimonial",
+              styles: {
+                width: "100%",
+                margin: "20px 0",
+                ...defaultStyles,
+              },
+              type: "testimonial",
+            },
+          },
+        });
+        break;
+
+      case "contactForm1":
+        dispatch({
+          type: "ADD_ELEMENT",
+          payload: {
+            containerId: id,
+            elementDetails: {
+              content: {
+                formTitle: "Contact Us",
+                formDescription:
+                  "Get in touch with us. We'd love to hear from you!",
+                submitText: "Send Message",
+                successMessage:
+                  "Thank you! Your message has been sent successfully.",
+                errorMessage:
+                  "Sorry, there was an error sending your message. Please try again.",
+
+                // Form configuration
+                action1: "/api/contact",
+                method: "POST",
+                redirectUrl: "",
+                emailTo: "contact@example.com",
+                emailSubject: "New Contact Form Submission",
+
+                // Fields configuration
+                fields: [
+                  {
+                    id: "name",
+                    type: "text",
+                    label: "Full Name",
+                    placeholder: "Enter your full name",
+                    required: true,
+                    enabled: true,
+                  },
+                  {
+                    id: "email",
+                    type: "email",
+                    label: "Email Address",
+                    placeholder: "Enter your email",
+                    required: true,
+                    enabled: true,
+                  },
+                  {
+                    id: "phone",
+                    type: "tel",
+                    label: "Phone Number",
+                    placeholder: "Enter your phone number",
+                    required: false,
+                    enabled: true,
+                  },
+                  {
+                    id: "subject",
+                    type: "text",
+                    label: "Subject",
+                    placeholder: "What is this about?",
+                    required: false,
+                    enabled: true,
+                  },
+                  {
+                    id: "message",
+                    type: "textarea",
+                    label: "Message",
+                    placeholder: "Enter your message here...",
+                    required: true,
+                    enabled: true,
+                  },
+                ],
+
+                layout: "vertical",
+                showLabels: true,
+                showPlaceholders: true,
+                showRequiredIndicator: true,
+                enableValidation: true,
+                showProgressBar: false,
+                enableSpamProtection: true,
+
+                // Styling
+                formBackground: "#ffffff",
+                formBorder: "#e5e7eb",
+                titleColor: "#111827",
+                descriptionColor: "#6b7280",
+                labelColor: "#374151",
+                inputBackground: "#ffffff",
+                inputBorder: "#d1d5db",
+                inputFocusBorder: "#3b82f6",
+                buttonBackground: "#3b82f6",
+                buttonText: "#ffffff",
+                buttonHover: "#2563eb",
+                borderRadius: 8,
+                padding: 24,
+                spacing: 16,
+              },
+              id: v4(),
+              name: "Contact Form",
+              styles: {
+                width: "100%",
+                margin: "20px 0",
+                ...defaultStyles,
+              },
+              type: "contactForm1",
+            },
+          },
+        });
+        break;
     }
   };
 

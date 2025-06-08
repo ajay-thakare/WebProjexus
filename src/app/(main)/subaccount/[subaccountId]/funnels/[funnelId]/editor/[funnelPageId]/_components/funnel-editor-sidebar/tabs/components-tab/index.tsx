@@ -33,6 +33,8 @@ import EmbedPlaceholder from "./placeholders/interactive-ph/embed-placeholder";
 import SocialIconsPlaceholder from "./placeholders/interactive-ph/socialIcons-placeholder";
 import PopupPlaceholder from "./placeholders/interactive-ph/popup-placeholder";
 import TooltipPlaceholder from "./placeholders/interactive-ph/tooltip-placeholder";
+import TestimonialPlaceholder from "./placeholders/buisness-ph/testimonial-placeholder";
+import ContactForm1Placeholder from "./placeholders/buisness-ph/contactForm-placeholder";
 
 type Props = {};
 
@@ -235,12 +237,18 @@ const ComponentsTab = (props: Props) => {
       id: "paymentForm",
       group: "business",
     },
-    // {
-    //   Component: <TestimonialPlaceholder />,
-    //   label: "Testimonial",
-    //   id: "testimonial",
-    //   group: "business",
-    // },
+    {
+      Component: <TestimonialPlaceholder />,
+      label: "Testimonial",
+      id: "testimonial",
+      group: "business",
+    },
+    {
+      Component: <ContactForm1Placeholder />,
+      label: "Contact",
+      id: "contactForm1",
+      group: "business",
+    },
   ];
 
   const groupConfig = [

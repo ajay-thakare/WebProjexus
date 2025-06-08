@@ -58,6 +58,7 @@ export type EditorElement = {
         target?: string;
         action?: "scroll" | "download" | "popup" | "submit";
         // audio
+
         controls?: boolean;
         autoplay?: boolean;
         muted?: boolean;
@@ -218,8 +219,6 @@ export type EditorElement = {
         triggerButtonColor?: string;
         triggerButtonTextColor?: string;
 
-        // Add these properties to your EditorElement content type union in editor-provider.tsx:
-
         // tooltip properties
         tooltipContent?: string;
         triggerTypee?: "hover" | "click" | "focus" | "manual";
@@ -265,6 +264,92 @@ export type EditorElement = {
         // Trigger element styling
         triggerStyle?: "button" | "text" | "icon" | "badge" | "link";
         triggerUnderline?: boolean;
+        // testimonial properties
+        testimonials?: Array<{
+          id: string;
+          quote: string;
+          author: string;
+          position: string;
+          company: string;
+          avatar: string;
+          rating: number;
+        }>;
+        layoutt?:
+          | "card"
+          | "quote"
+          | "minimal"
+          | "bubble"
+          | "split"
+          | "centered";
+        stylee?:
+          | "modern"
+          | "classic"
+          | "elegant"
+          | "corporate"
+          | "creative"
+          | "minimal";
+        showAvatar?: boolean;
+        showRating?: boolean;
+        showQuotes?: boolean;
+        showCompany?: boolean;
+        autoplaySpeed?: number;
+        showNavigation?: boolean;
+        showDots?: boolean;
+        itemsPerView?: number;
+        // testimonial styling
+        quoteColor?: string;
+        authorColor?: string;
+        positionColor?: string;
+        cardBackground?: string;
+        cardBorder?: string;
+        ratingColor?: string;
+        spacing?: number;
+
+        // Add these properties to your EditorElement content type union in editor-provider.tsx:
+
+        // contact form properties
+        formTitle?: string;
+        formDescription?: string;
+        submitText?: string;
+        successMessage?: string;
+        errorMessage?: string;
+
+        // Form configuration
+        action1?: string;
+        method?: "GET" | "POST";
+        redirectUrl?: string;
+        emailTo?: string;
+        emailSubject?: string;
+
+        // Fields configuration
+        fields?: Array<{
+          id: string;
+          type: string;
+          label: string;
+          placeholder: string;
+          required: boolean;
+          enabled: boolean;
+          options?: Array<{ value: string; label: string }>;
+        }>;
+
+        layout1?: "vertical" | "horizontal" | "inline";
+        showPlaceholders?: boolean;
+        showRequiredIndicator?: boolean;
+        enableValidation?: boolean;
+        showProgressBar?: boolean;
+        enableSpamProtection?: boolean;
+
+        // Contact form styling
+        formBackground?: string;
+        formBorder?: string;
+        titleColor?: string;
+        descriptionColor?: string;
+        inputBackground?: string;
+        inputBorder?: string;
+        inputFocusBorder?: string;
+        buttonBackground?: string;
+        buttonText?: string;
+        buttonHover?: string;
       };
 };
 
