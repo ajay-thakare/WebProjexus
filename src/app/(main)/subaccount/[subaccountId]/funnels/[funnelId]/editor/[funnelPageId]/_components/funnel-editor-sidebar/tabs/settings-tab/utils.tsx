@@ -1,13 +1,9 @@
 "use client";
 import { useEditor } from "@/providers/editor/editor-provider";
 
-/**
- * Utility functions for settings components
- */
+//  Utility functions for settings components
 
-/**
- * Updates the styles of the selected element
- */
+// Updates the styles of the selected element
 export const useStylesUpdater = () => {
   const { state, dispatch } = useEditor();
 
@@ -35,9 +31,7 @@ export const useStylesUpdater = () => {
   return { handleOnChanges, state, dispatch };
 };
 
-/**
- * Updates the custom values of the selected element
- */
+// Updates the custom values of the selected element
 export const useCustomValuesUpdater = () => {
   const { state, dispatch } = useEditor();
 

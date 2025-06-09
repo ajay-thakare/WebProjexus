@@ -187,7 +187,7 @@ const ComponentsTab = (props: Props) => {
     },
     {
       Component: <ContactFormComponentPlaceholder />,
-      label: "Contact Form",
+      label: "Contact",
       id: "contactForm",
       group: "forms",
     },
