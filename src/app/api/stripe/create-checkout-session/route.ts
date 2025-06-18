@@ -31,10 +31,9 @@ export async function POST(req: Request) {
   }
 
   const origin = req.headers.get("origin");
-
   const body = await req.json();
-
-  const { subAccountConnectAccId, prices } = RequestBodySchema.parse(body);
+  const { subAccountConnectAccId, prices, subaccountId } =
+    RequestBodySchema.parse(body);
 
   try {
     const subscriptionPriceExists = prices.some((price) => price.recurring);
@@ -48,18 +47,31 @@ export async function POST(req: Request) {
         ...(subscriptionPriceExists
           ? {
               subscription_data: {
-                metadata: { connectAccountSubscriptions: "true" },
+                metadata: {
+                  connectAccountSubscriptions: "true",
+                  subaccountId: subaccountId, // Add this for webhook processing
+                  source: "funnel_checkout", // Add this to identify source
+                },
                 application_fee_percent:
                   +env.data.NEXT_PUBLIC_PLATFORM_SUBSCRIPTION_PERCENT,
               },
             }
           : {
               payment_intent_data: {
-                metadata: { connectAccountPayments: "true" },
+                metadata: {
+                  connectAccountPayments: "true",
+                  subaccountId: subaccountId, // Add this for webhook processing
+                  source: "funnel_checkout", // Add this to identify source
+                },
                 application_fee_amount:
                   +env.data.NEXT_PUBLIC_PLATFORM_ONETIME_FEE * 100,
               },
             }),
+        metadata: {
+          subaccountId: subaccountId, // Add session-level metadata
+          connectAccountId: subAccountConnectAccId,
+          source: "funnel_checkout",
+        },
         mode: subscriptionPriceExists ? "subscription" : "payment",
         ui_mode: "embedded",
         redirect_on_completion: "never",
@@ -89,7 +101,6 @@ export async function POST(req: Request) {
   }
 }
 
-//---------------
 export async function OPTIONS(request: Request) {
   const allowedOrigin = request.headers.get("origin");
   const response = new NextResponse(null, {
