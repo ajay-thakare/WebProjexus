@@ -45,7 +45,7 @@ type ProcessedSession = {
   amount_total: number;
   status: string | null;
   customer_details?: {
-    email?: string | null; // <-- allow null here
+    email?: string | null;
   } | null;
   [key: string]: any;
 };
@@ -79,7 +79,6 @@ export default async function Page({ params, searchParams }: PageProps) {
   const startDate = new Date(`${currentYear}-01-01T00:00:00Z`).getTime() / 1000;
   const endDate = new Date(`${currentYear}-12-31T23:59:59Z`).getTime() / 1000;
 
-  // Helper function to format date as DD-MM-YYYY
   const formatDateDDMMYYYY = (date: Date): string => {
     const day = date.getDate().toString().padStart(2, "0");
     const month = (date.getMonth() + 1).toString().padStart(2, "0");
@@ -87,7 +86,6 @@ export default async function Page({ params, searchParams }: PageProps) {
     return `${day}-${month}-${year}`;
   };
 
-  // Create a complete date range from start of year to current date
   const createDateRange = (): ChartDataPoint[] => {
     const dateRange: ChartDataPoint[] = [];
     const start = new Date(`${currentYear}-01-01`);
@@ -188,7 +186,6 @@ export default async function Page({ params, searchParams }: PageProps) {
         : 0;
   }
 
-  // Create complete chart data with all dates
   const createChartData = (): ChartDataPoint[] => {
     const dateRange = createDateRange();
 

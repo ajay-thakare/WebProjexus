@@ -42,7 +42,7 @@ export default async function Page({ params, searchParams }: PageProps) {
   const { code } = await searchParams;
 
   let currency = "USD";
-  let sessions: any[] = [];
+  let allSessions: any[] = [];
   let totalClosedSessions: any[] = [];
   let totalPendingSessions: any[] = [];
   let net = 0;
@@ -61,54 +61,135 @@ export default async function Page({ params, searchParams }: PageProps) {
     where: { agencyId: agencyId },
   });
 
-  if (agencyDetails.connectAccountId) {
-    const response = await stripe.accounts.retrieve({
-      stripeAccount: agencyDetails.connectAccountId,
-    });
+  const formatDateForChart = (timestamp: number): string => {
+    const date = new Date(timestamp * 1000);
+    const day = date.getDate().toString().padStart(2, "0");
+    const month = (date.getMonth() + 1).toString().padStart(2, "0");
+    const year = date.getFullYear();
+    return `${day}-${month}-${year}`;
+  };
 
-    currency = response.default_currency?.toUpperCase() || "USD";
+  const createDateRange = () => {
+    const dateRange = [];
+    const start = new Date(`${currentYear}-01-01`);
+    const end = new Date();
 
-    const checkoutSessions = await stripe.checkout.sessions.list(
-      {
-        created: { gte: startDate, lte: endDate },
-        limit: 100,
-      },
-      { stripeAccount: agencyDetails.connectAccountId }
-    );
+    for (
+      let date = new Date(start);
+      date <= end;
+      date.setDate(date.getDate() + 1)
+    ) {
+      dateRange.push({
+        date: formatDateForChart(date.getTime() / 1000),
+        amount_total: 0,
+      });
+    }
+    return dateRange;
+  };
 
-    sessions = checkoutSessions.data;
-    totalClosedSessions = checkoutSessions.data
-      .filter((session) => session.status === "complete")
-      .map((session) => ({
-        ...session,
-        created: new Date(session.created).toLocaleDateString(),
-        amount_total: session.amount_total ? session.amount_total / 100 : 0,
-      }));
+  // Aggregate data from all subaccounts with Stripe connections
+  for (const subaccount of subaccounts) {
+    if (subaccount.connectAccountId) {
+      try {
+        // Get currency from first connected account
+        if (currency === "USD") {
+          const response = await stripe.accounts.retrieve({
+            stripeAccount: subaccount.connectAccountId,
+          });
+          currency = response.default_currency?.toUpperCase() || "USD";
+        }
 
-    totalPendingSessions = checkoutSessions.data
-      .filter((session) => session.status === "open")
-      .map((session) => ({
-        ...session,
-        created: new Date(session.created).toLocaleDateString(),
-        amount_total: session.amount_total ? session.amount_total / 100 : 0,
-      }));
+        const checkoutSessions = await stripe.checkout.sessions.list(
+          {
+            created: { gte: startDate, lte: endDate },
+            limit: 100,
+          },
+          { stripeAccount: subaccount.connectAccountId }
+        );
 
-    net = +totalClosedSessions
-      .reduce((total, session) => total + (session.amount_total || 0), 0)
-      .toFixed(2);
+        // Add all sessions to the aggregate
+        allSessions.push(...checkoutSessions.data);
 
-    potentialIncome = +totalPendingSessions
-      .reduce((total, session) => total + (session.amount_total || 0), 0)
-      .toFixed(2);
+        // Process closed sessions for this subaccount
+        const closedSessions = checkoutSessions.data
+          .filter((session) => session.status === "complete")
+          .map((session) => ({
+            ...session,
+            subaccountId: subaccount.id,
+            subaccountName: subaccount.name,
+            created: formatDateForChart(session.created),
+            createdTimestamp: session.created * 1000,
+            amount_total: session.amount_total ? session.amount_total / 100 : 0,
+          }));
 
-    closingRate =
-      checkoutSessions.data.length > 0
-        ? +(
-            (totalClosedSessions.length / checkoutSessions.data.length) *
-            100
-          ).toFixed(2)
-        : 0;
+        totalClosedSessions.push(...closedSessions);
+
+        // Process pending sessions for this subaccount
+        const pendingSessions = checkoutSessions.data
+          .filter(
+            (session) =>
+              session.status === "open" || session.status === "expired"
+          )
+          .map((session) => ({
+            ...session,
+            subaccountId: subaccount.id,
+            subaccountName: subaccount.name,
+            created: formatDateForChart(session.created),
+            createdTimestamp: session.created * 1000,
+            amount_total: session.amount_total ? session.amount_total / 100 : 0,
+          }));
+
+        totalPendingSessions.push(...pendingSessions);
+      } catch (error) {
+        console.error(
+          `Error fetching data for subaccount ${subaccount.id}:`,
+          error
+        );
+        // Continue with other subaccounts even if one fails
+      }
+    }
   }
+
+  // Calculate totals from aggregated data
+  net = +totalClosedSessions
+    .reduce((total, session) => total + (session.amount_total || 0), 0)
+    .toFixed(2);
+
+  potentialIncome = +totalPendingSessions
+    .reduce((total, session) => total + (session.amount_total || 0), 0)
+    .toFixed(2);
+
+  closingRate =
+    allSessions.length > 0
+      ? +((totalClosedSessions.length / allSessions.length) * 100).toFixed(2)
+      : 0;
+
+  // Create chart data with proper aggregation by date
+  const createChartData = () => {
+    const dateRange = createDateRange();
+
+    if (!totalClosedSessions || totalClosedSessions.length === 0) {
+      return dateRange;
+    }
+
+    // Group sessions by date and sum amounts
+    const sessionsByDate = [
+      ...totalClosedSessions,
+      ...totalPendingSessions,
+    ].reduce((acc, session) => {
+      const date = session.created;
+      acc[date] = (acc[date] || 0) + session.amount_total;
+      return acc;
+    }, {});
+
+    // Merge with date range
+    return dateRange.map((dateItem) => ({
+      date: dateItem.date,
+      amount_total: sessionsByDate[dateItem.date] || 0,
+    }));
+  };
+
+  const chartData = createChartData();
 
   const goalProgress = (subaccounts.length / agencyDetails.goal) * 100;
 
@@ -121,7 +202,8 @@ export default async function Page({ params, searchParams }: PageProps) {
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-br from-pink-400/10 to-rose-600/10 rounded-full blur-3xl animate-pulse delay-500" />
       </div>
 
-      {!agencyDetails.connectAccountId && (
+      {/* Show connection prompt only if NO subaccounts have Stripe connected */}
+      {subaccounts.filter((sub) => sub.connectAccountId).length === 0 && (
         <div className="absolute inset-0 z-50 flex items-center justify-center backdrop-blur-xl bg-white/10 dark:bg-black/10">
           <Card className="w-full max-w-lg mx-4 border-0 shadow-2xl bg-white/95 dark:bg-slate-800/95 backdrop-blur-md">
             <CardHeader className="text-center space-y-6 pb-8">
@@ -130,19 +212,19 @@ export default async function Page({ params, searchParams }: PageProps) {
               </div>
               <div className="space-y-3">
                 <CardTitle className="text-3xl font-bold bg-gradient-to-r from-violet-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
-                  Connect Stripe Account
+                  Connect Subaccount Stripe
                 </CardTitle>
                 <CardDescription className="text-lg leading-relaxed text-slate-600 dark:text-slate-300">
-                  Unlock the full power of your analytics dashboard by
-                  connecting your Stripe account
+                  Connect Stripe accounts for your subaccounts to see aggregated
+                  analytics data
                 </CardDescription>
               </div>
               <Link
-                href={`/agency/${agencyDetails.id}/launchpad`}
+                href={`/agency/${agencyDetails.id}/all-subaccounts`}
                 className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-violet-600 via-purple-600 to-pink-600 hover:from-violet-700 hover:via-purple-700 hover:to-pink-700 text-white text-lg font-semibold rounded-2xl transition-all duration-300 transform hover:scale-105 hover:shadow-2xl"
               >
                 <Sparkles className="w-6 h-6" />
-                Launch Dashboard
+                Manage Subaccounts
                 <ArrowUpRight className="w-5 h-5" />
               </Link>
             </CardHeader>
@@ -172,6 +254,16 @@ export default async function Page({ params, searchParams }: PageProps) {
                 >
                   <Activity className="w-4 h-4 mr-2" />
                   Live
+                </Badge>
+                <Badge
+                  variant="outline"
+                  className="px-4 py-2 text-base font-medium border-2 border-dashed border-blue-300 dark:border-blue-700 text-blue-600 dark:text-blue-400"
+                >
+                  <Users className="w-4 h-4 mr-2" />
+                  {
+                    subaccounts.filter((sub) => sub.connectAccountId).length
+                  }{" "}
+                  Connected
                 </Badge>
               </div>
             </div>
@@ -213,7 +305,7 @@ export default async function Page({ params, searchParams }: PageProps) {
                 <div className="h-full bg-gradient-to-r from-emerald-500 to-green-500 rounded-full w-3/4 animate-pulse" />
               </div>
               <p className="text-sm text-emerald-600 dark:text-emerald-400 mt-3 font-medium">
-                Revenue from completed transactions
+                Aggregated revenue from all subaccounts
               </p>
             </CardContent>
           </Card>
@@ -245,7 +337,7 @@ export default async function Page({ params, searchParams }: PageProps) {
                 <div className="h-full bg-gradient-to-r from-amber-500 to-orange-500 rounded-full w-2/3 animate-pulse" />
               </div>
               <p className="text-sm text-amber-600 dark:text-amber-400 mt-3 font-medium">
-                Revenue from open sessions
+                Potential revenue from open sessions
               </p>
             </CardContent>
           </Card>
@@ -316,7 +408,6 @@ export default async function Page({ params, searchParams }: PageProps) {
 
         {/* Charts Section */}
         <div className="grid gap-8 lg:grid-cols-5">
-          {/* Transaction History */}
           <Card className="lg:col-span-3 border-0 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm shadow-xl hover:shadow-2xl transition-all duration-300">
             <CardHeader className="pb-6">
               <div className="flex items-center justify-between">
@@ -325,7 +416,7 @@ export default async function Page({ params, searchParams }: PageProps) {
                     Transaction Analytics
                   </CardTitle>
                   <CardDescription className="text-lg text-slate-600 dark:text-slate-400">
-                    Revenue flow throughout {currentYear}
+                    Aggregated revenue flow throughout {currentYear}
                   </CardDescription>
                 </div>
                 <div className="p-4 bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-700 dark:to-slate-600 rounded-2xl">
@@ -335,18 +426,34 @@ export default async function Page({ params, searchParams }: PageProps) {
             </CardHeader>
             <CardContent>
               <div className="h-80 p-4 bg-gradient-to-br from-slate-50/50 to-white/50 dark:from-slate-800/50 dark:to-slate-700/50 rounded-2xl">
-                <AreaChart
-                  className="text-sm h-full"
-                  data={[...totalClosedSessions, ...totalPendingSessions]}
-                  index="created"
-                  categories={["amount_total"]}
-                  colors={["violet"]}
-                  yAxisWidth={80}
-                  showAnimation={true}
-                  showGridLines={true}
-                  showLegend={false}
-                  curveType="monotone"
-                />
+                {chartData && chartData.length > 0 ? (
+                  <AreaChart
+                    className="text-sm h-full"
+                    data={chartData}
+                    index="date"
+                    categories={["amount_total"]}
+                    colors={["violet"]}
+                    yAxisWidth={80}
+                    showAnimation={true}
+                    showGridLines={true}
+                    showLegend={false}
+                    curveType="monotone"
+                    startEndOnly={true}
+                    connectNulls={true}
+                  />
+                ) : (
+                  <div className="flex items-center justify-center h-full text-slate-500 dark:text-slate-400">
+                    <div className="text-center space-y-3">
+                      <BarChart3 className="w-12 h-12 mx-auto opacity-50" />
+                      <p className="text-lg font-medium">
+                        No transaction data available
+                      </p>
+                      <p className="text-sm">
+                        Connect subaccount Stripe accounts to see charts
+                      </p>
+                    </div>
+                  </div>
+                )}
               </div>
             </CardContent>
           </Card>
@@ -360,7 +467,7 @@ export default async function Page({ params, searchParams }: PageProps) {
                     Conversion Rate
                   </CardTitle>
                   <CardDescription className="text-slate-600 dark:text-slate-400">
-                    Success metrics
+                    Aggregated success metrics
                   </CardDescription>
                 </div>
               </div>
@@ -376,7 +483,7 @@ export default async function Page({ params, searchParams }: PageProps) {
               </div>
 
               <div className="space-y-4">
-                {sessions.length > 0 && (
+                {allSessions.length > 0 && (
                   <div className="p-4 bg-gradient-to-r from-rose-50 to-red-50 dark:from-rose-900/20 dark:to-red-900/20 rounded-2xl border border-rose-200 dark:border-rose-800">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-3">
@@ -385,15 +492,15 @@ export default async function Page({ params, searchParams }: PageProps) {
                         </div>
                         <div>
                           <p className="font-bold text-rose-900 dark:text-rose-100">
-                            Abandoned Carts
+                            Total Sessions
                           </p>
                           <p className="text-sm text-rose-600 dark:text-rose-400">
-                            Open sessions
+                            All checkout sessions
                           </p>
                         </div>
                       </div>
                       <span className="text-3xl font-black text-rose-700 dark:text-rose-300">
-                        {sessions.length}
+                        {allSessions.length}
                       </span>
                     </div>
                   </div>
