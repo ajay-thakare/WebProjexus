@@ -10,7 +10,7 @@ import MobileShortcutGuide from "@/components/zextra/mobile-shortcut-guide";
 import { db } from "@/lib/db";
 import { stripe } from "@/lib/stripe";
 import { getStripeOAuthLink } from "@/lib/utils";
-import { CheckCircleIcon } from "lucide-react";
+import { CheckCircleIcon, Users } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -41,6 +41,13 @@ const LaunchPadPage = async ({ params, searchParams }: Props) => {
     agencyDetails.name &&
     agencyDetails.state &&
     agencyDetails.zipCode;
+
+  const getInitials = (name: string) =>
+    name
+      .split(" ")
+      .map((word) => word[0])
+      .join("")
+      .toUpperCase();
 
   const stripeOAuthLink = getStripeOAuthLink(
     "agency",
@@ -121,13 +128,20 @@ const LaunchPadPage = async ({ params, searchParams }: Props) => {
             </div>
             <div className="flex justify-between items-center w-full border p-4 rounded-lg gap-2">
               <div className="flex md:items-center gap-4 flex-col md:!flex-row">
-                <Image
-                  src={agencyDetails.agencyLogo}
-                  alt="agency logo"
-                  height={80}
-                  width={80}
-                  className="rounded-md object-contain"
-                />
+                {agencyDetails.agencyLogo ? (
+                  <Image
+                    src={agencyDetails.agencyLogo}
+                    alt="agency logo"
+                    height={80}
+                    width={80}
+                    className="rounded-md object-contain"
+                  />
+                ) : (
+                  <div className="w-[80px] h-[60px] bg-gray-100 rounded-md flex items-center justify-center border text-xl font-semibold text-gray-600">
+                    {getInitials(agencyDetails.name || "A")}
+                  </div>
+                )}
+
                 <p>Fill in all your business details</p>
               </div>
               {allDetailsExist ? (
@@ -139,7 +153,9 @@ const LaunchPadPage = async ({ params, searchParams }: Props) => {
                 <Link
                   className="bg-primary py-2 px-4 rounded-md text-white"
                   href={`/agency/${agencyId}/settings`}
-                />
+                >
+                  Start
+                </Link>
               )}
             </div>
           </CardContent>

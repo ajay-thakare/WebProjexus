@@ -3,18 +3,15 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
-import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
 import { db } from "@/lib/db";
 import { stripe } from "@/lib/stripe";
 import { AreaChart } from "@tremor/react";
 import {
-  ClipboardIcon,
   Contact2,
   DollarSign,
   Goal,
@@ -28,7 +25,7 @@ import {
   Zap,
   BarChart3,
   PieChart,
-  Sparkles,
+  Clipboard,
 } from "lucide-react";
 import Link from "next/link";
 
@@ -91,7 +88,6 @@ export default async function Page({ params, searchParams }: PageProps) {
   for (const subaccount of subaccounts) {
     if (subaccount.connectAccountId) {
       try {
-        // Get currency from first connected account
         if (currency === "USD") {
           const response = await stripe.accounts.retrieve({
             stripeAccount: subaccount.connectAccountId,
@@ -107,10 +103,8 @@ export default async function Page({ params, searchParams }: PageProps) {
           { stripeAccount: subaccount.connectAccountId }
         );
 
-        // Add all sessions to the aggregate
         allSessions.push(...checkoutSessions.data);
 
-        // Process closed sessions for this subaccount
         const closedSessions = checkoutSessions.data
           .filter((session) => session.status === "complete")
           .map((session) => ({
@@ -124,7 +118,6 @@ export default async function Page({ params, searchParams }: PageProps) {
 
         totalClosedSessions.push(...closedSessions);
 
-        // Process pending sessions for this subaccount
         const pendingSessions = checkoutSessions.data
           .filter(
             (session) =>
@@ -145,7 +138,6 @@ export default async function Page({ params, searchParams }: PageProps) {
           `Error fetching data for subaccount ${subaccount.id}:`,
           error
         );
-        // Continue with other subaccounts even if one fails
       }
     }
   }
@@ -202,29 +194,27 @@ export default async function Page({ params, searchParams }: PageProps) {
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-br from-pink-400/10 to-rose-600/10 rounded-full blur-3xl animate-pulse delay-500" />
       </div>
 
-      {/* Show connection prompt only if NO subaccounts have Stripe connected */}
-      {subaccounts.filter((sub) => sub.connectAccountId).length === 0 && (
-        <div className="absolute inset-0 z-50 flex items-center justify-center backdrop-blur-xl bg-white/10 dark:bg-black/10">
-          <Card className="w-full max-w-lg mx-4 border-0 shadow-2xl bg-white/95 dark:bg-slate-800/95 backdrop-blur-md">
+      {!agencyDetails.connectAccountId && (
+        <div className="absolute inset-0 z-50 mt-15 flex items-start justify-center pt-20 md:pt-0 backdrop-blur-xl bg-background/10 dark:bg-background/10">
+          <Card className="w-full max-w-lg mx-4 border-0 shadow-2xl bg-card/95 backdrop-blur-md">
             <CardHeader className="text-center space-y-6 pb-8">
-              <div className="mx-auto w-20 h-20 bg-gradient-to-br from-violet-500 via-purple-500 to-pink-500 rounded-3xl flex items-center justify-center shadow-lg animate-bounce">
-                <Zap className="w-10 h-10 text-white" />
+              <div className="mx-auto w-20 h-20 bg-gradient-to-br from-primary via-primary/80 to-secondary rounded-3xl flex items-center justify-center shadow-lg animate-bounce">
+                <Zap className="w-10 h-10 text-primary-foreground" />
               </div>
               <div className="space-y-3">
-                <CardTitle className="text-3xl font-bold bg-gradient-to-r from-violet-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
-                  Connect Subaccount Stripe
+                <CardTitle className="text-3xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                  Connect Your Stripe
                 </CardTitle>
-                <CardDescription className="text-lg leading-relaxed text-slate-600 dark:text-slate-300">
-                  Connect Stripe accounts for your subaccounts to see aggregated
-                  analytics data
+                <CardDescription className="text-lg leading-relaxed text-muted-foreground">
+                  You need to connect your stripe account to see metrics
                 </CardDescription>
               </div>
               <Link
-                href={`/agency/${agencyDetails.id}/all-subaccounts`}
-                className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-violet-600 via-purple-600 to-pink-600 hover:from-violet-700 hover:via-purple-700 hover:to-pink-700 text-white text-lg font-semibold rounded-2xl transition-all duration-300 transform hover:scale-105 hover:shadow-2xl"
+                href={`/agency/${agencyDetails.id}/launchpad`}
+                className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 text-primary-foreground text-lg font-semibold rounded-2xl transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-primary/25"
               >
-                <Sparkles className="w-6 h-6" />
-                Manage Subaccounts
+                <Clipboard className="w-6 h-6" />
+                Launchpad
                 <ArrowUpRight className="w-5 h-5" />
               </Link>
             </CardHeader>
