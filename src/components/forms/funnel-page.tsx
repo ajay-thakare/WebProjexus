@@ -169,6 +169,7 @@ const CreateFunnelPage = ({
                       description: `Deleted a funnel page | ${response?.name}`,
                       subaccountId: subaccountId,
                     });
+                    toast.success(`${response?.name} Deleted !!!`);
                     router.refresh();
                   }}
                 >
