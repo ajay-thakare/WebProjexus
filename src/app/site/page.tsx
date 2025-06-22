@@ -27,6 +27,7 @@ import { AnimatedFeatureCards } from "@/components/animations/animated-feature-c
 import { LiquidFeatureCards } from "@/components/animations/liquid-feature-card";
 import { AnimatedSectionHeading } from "@/components/animations/section-heading-component";
 import { AnimatedPricingCards } from "@/components/animations/animated-pricing-card-component";
+import Footer from "@/components/site/footer";
 
 export default async function Home() {
   // Fetch dynamic pricing from Stripe
@@ -66,7 +67,7 @@ export default async function Home() {
 
   const testimonials = [
     {
-      name: "Sarah Johnson",
+      name: "Pratik Mali",
       role: "Agency Owner",
       company: "Digital Solutions Co.",
       content:
@@ -74,7 +75,7 @@ export default async function Home() {
       rating: 5,
     },
     {
-      name: "Mike Chen",
+      name: "Hemant Patil",
       role: "Creative Director",
       company: "Design Studio X",
       content:
@@ -82,7 +83,7 @@ export default async function Home() {
       rating: 5,
     },
     {
-      name: "Emily Rodriguez",
+      name: "Harshali Shelar",
       role: "Freelancer",
       company: "ER Creative",
       content:
@@ -276,103 +277,8 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="py-16 border-t border-muted-foreground/20 relative z-10">
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="grid md:grid-cols-4 gap-8 mb-12">
-            <div className="space-y-4">
-              <h3 className="text-2xl font-bold bg-gradient-to-r from-primary to-secondary-foreground text-transparent bg-clip-text">
-                WebPro
-              </h3>
-              <p className="text-muted-foreground">
-                The ultimate platform for agency management and website
-                creation.
-              </p>
-              <div className="flex gap-4">
-                <div className="w-10 h-10 bg-muted rounded-lg flex items-center justify-center hover:bg-primary/20 cursor-pointer transition-colors">
-                  <span className="text-sm font-bold">tw</span>
-                </div>
-                <div className="w-10 h-10 bg-muted rounded-lg flex items-center justify-center hover:bg-primary/20 cursor-pointer transition-colors">
-                  <span className="text-sm font-bold">li</span>
-                </div>
-                <div className="w-10 h-10 bg-muted rounded-lg flex items-center justify-center hover:bg-primary/20 cursor-pointer transition-colors">
-                  <span className="text-sm font-bold">gh</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="space-y-4">
-              <h4 className="font-semibold">Product</h4>
-              <div className="space-y-2 text-muted-foreground">
-                <div className="hover:text-foreground cursor-pointer transition-colors">
-                  Features
-                </div>
-                <div className="hover:text-foreground cursor-pointer transition-colors">
-                  Pricing
-                </div>
-                <div className="hover:text-foreground cursor-pointer transition-colors">
-                  Integrations
-                </div>
-                <div className="hover:text-foreground cursor-pointer transition-colors">
-                  API
-                </div>
-              </div>
-            </div>
-
-            <div className="space-y-4">
-              <h4 className="font-semibold">Resources</h4>
-              <div className="space-y-2 text-muted-foreground">
-                <div className="hover:text-foreground cursor-pointer transition-colors">
-                  Documentation
-                </div>
-                <div className="hover:text-foreground cursor-pointer transition-colors">
-                  Blog
-                </div>
-                <div className="hover:text-foreground cursor-pointer transition-colors">
-                  Support
-                </div>
-                <div className="hover:text-foreground cursor-pointer transition-colors">
-                  Community
-                </div>
-              </div>
-            </div>
-
-            <div className="space-y-4">
-              <h4 className="font-semibold">Company</h4>
-              <div className="space-y-2 text-muted-foreground">
-                <div className="hover:text-foreground cursor-pointer transition-colors">
-                  About
-                </div>
-                <div className="hover:text-foreground cursor-pointer transition-colors">
-                  Careers
-                </div>
-                <Link
-                  href="#"
-                  className="block hover:text-foreground transition-colors"
-                >
-                  Terms of Service
-                </Link>
-                <Link
-                  href="#"
-                  className="block hover:text-foreground transition-colors"
-                >
-                  Privacy Policy
-                </Link>
-                <Link
-                  href="#"
-                  className="block hover:text-foreground transition-colors"
-                >
-                  Contact Us
-                </Link>
-              </div>
-            </div>
-          </div>
-
-          <div className="border-t border-muted-foreground/20 pt-8 text-center text-muted-foreground">
-            <p>© 2025 WebPro. All rights reserved.</p>
-          </div>
-        </div>
-      </footer>
+      {/* Footer Component */}
+      <Footer />
     </>
   );
 }

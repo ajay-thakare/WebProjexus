@@ -50,12 +50,14 @@ export default function FeaturesPage() {
     },
   ];
 
+  // Updated inDepthFeatures with image paths
   const inDepthFeatures = [
     {
       title: "Drag & Drop Website Builder",
       subtitle: "Create stunning websites effortlessly",
       description:
         "Our intuitive drag-and-drop interface allows you to create professional websites without any coding knowledge. Simply drag elements onto the canvas and customize them to fit your brand.",
+      image: "/features/drag-drop-builder.png",
       imageAlt: "Website builder interface showing drag and drop functionality",
     },
     {
@@ -63,6 +65,7 @@ export default function FeaturesPage() {
       subtitle: "Work together efficiently",
       description:
         "WebPro enables seamless team collaboration with features like task management, real-time feedback, and project sharing. Keep everyone on the same page and streamline your workflow.",
+      image: "/features/pipelines.png",
       imageAlt:
         "Team collaboration illustration with two people working together",
     },
@@ -71,6 +74,7 @@ export default function FeaturesPage() {
       subtitle: "Simplify client billing",
       description:
         "Manage your client subscriptions with ease. Track payments, automate billing, and ensure timely renewals, all from one centralized dashboard.",
+      image: "/features/subscription-management.png",
       imageAlt: "Dashboard showing subscription management interface",
     },
   ];
@@ -222,7 +226,7 @@ export default function FeaturesPage() {
         </div>
       </section>
 
-      {/* In-Depth Features Section */}
+      {/* In-Depth Features Section - UPDATED WITH IMAGES */}
       <section
         id="in-depth-features"
         data-section
@@ -261,11 +265,25 @@ export default function FeaturesPage() {
                 }}
               >
                 <div className="flex-1">
-                  <div className="bg-gradient-to-br from-background to-muted/50 rounded-3xl p-8 border border-muted-foreground/20 shadow-lg">
-                    <div className="aspect-[4/3] bg-gradient-to-br from-muted to-muted-foreground/20 rounded-2xl flex items-center justify-center">
-                      <div className="text-muted-foreground text-lg font-medium text-center">
-                        {feature.title} Preview
-                      </div>
+                  <div className="bg-gradient-to-br from-background to-muted/50 rounded-3xl p-8 border border-muted-foreground/20 shadow-lg overflow-hidden">
+                    <div className="aspect-[4/3] relative rounded-2xl overflow-hidden">
+                      {feature.image ? (
+                        <Image
+                          src={feature.image}
+                          alt={feature.imageAlt}
+                          fill
+                          className="object-cover hover:scale-105 transition-transform duration-500"
+                          sizes="(max-width: 768px) 100vw, 50vw"
+                          priority={index === 0} // Priority loading for first image
+                        />
+                      ) : (
+                        // Fallback if no image is provided
+                        <div className="w-full h-full bg-gradient-to-br from-muted to-muted-foreground/20 flex items-center justify-center">
+                          <div className="text-muted-foreground text-lg font-medium text-center">
+                            {feature.title} Preview
+                          </div>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -414,7 +432,7 @@ export default function FeaturesPage() {
                       WebPro
                     </th>
                     <th className="text-center p-6 font-semibold text-lg text-muted-foreground">
-                      Competitor X
+                      Squarespace
                     </th>
                   </tr>
                 </thead>
