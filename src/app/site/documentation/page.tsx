@@ -150,14 +150,14 @@ export default function DocumentationPage() {
 
   const gettingStartedSteps = [
     { id: 1, text: "Create your first agency project", completed: false },
-    { id: 2, text: "Set up your team and assign roles", completed: false },
-    { id: 3, text: "Build your first website or funnel", completed: false },
+    { id: 2, text: "Configure billing and subscriptions", completed: false },
+    { id: 3, text: "Set up your team and assign roles", completed: false },
     {
       id: 4,
-      text: "Configure client billing and subscriptions",
+      text: "Build your first website or funnel",
       completed: false,
     },
-    { id: 5, text: "Launch and start managing clients", completed: false },
+    { id: 5, text: "Start managing Agency and Projects", completed: false },
   ];
 
   const userGuides = [
