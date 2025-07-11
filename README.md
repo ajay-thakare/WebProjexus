@@ -1,6 +1,80 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🌐 WebPro – Cloud-Based SaaS Website Builder Tool
 
-## Getting Started
+**WebPro** is a modern, cloud-based B2B SaaS platform designed to help digital agencies build and manage websites quickly and efficiently. With a no-code drag-and-drop website builder, team collaboration tools, role-based access, and integrated Stripe payments, WebPro simplifies the entire workflow from project creation to launch.
+
+---
+
+## 🚀 Features
+
+- ⚙️ **Drag-and-Drop Website Builder**
+- 🧠 **Role-Based Access Control** (Agency Owner, Web Designer)
+- 💳 **Stripe Integration** for billing & subscriptions
+- 📊 **Real-Time Analytics & Charts** with Tremor
+- 📁 **Media Management System**
+- 📋 **To-Do Board / Pipelines** for project tracking
+- 🌐 **Live Page Preview with Custom Domains**
+- 🔐 **Clerk Authentication**
+- 🎨 Built with **ShadCN UI + Tailwind CSS**
+
+---
+
+## 🛠 Tech Stack
+
+| Category        | Technology             |
+|----------------|------------------------|
+| Frontend       | Next.js 14 (App Router), TypeScript |
+| Styling        | Tailwind CSS, ShadCN UI |
+| Backend        | Prisma ORM, API Routes |
+| Database       | Neon (PostgreSQL)      |
+| Auth           | Clerk                  |
+| Payments       | Stripe (Billing, Checkout, Webhooks) |
+| Charts         | Tremor Library         |
+| Deployment     | Vercel                 |
+
+---
+
+## 📁 Dashboards Overview
+
+### 1. 🔓 Landing Page
+- Public-facing marketing site with features, pricing, testimonials, and documentation
+- Users can sign up or log in
+
+### 2. 🧑‍💼 Agency Dashboard
+- Analytics dashboard for agency performance
+- Connect Stripe account and manage billing
+- Invite team members with specific roles
+- Create and manage sub-accounts (clients)
+
+### 3. 🎨 Sub-Account Dashboard
+- Project-level access for web designers or team members
+- Drag-and-drop website creation using the Funnels module
+- Media upload, contact management, and task board
+
+---
+
+## 📦 Getting Started
+
+### 🔧 Prerequisites
+
+- Node.js >= 18  
+- A PostgreSQL database (Neon recommended)  
+- Stripe account  
+- Clerk account  
+
+### 🧰 Clone and Install
+
+```bash
+git clone [https://github.com/ajay-thakare/webpro-saas-platform.git](https://github.com/ajay-thakare/WebProjexus.git)
+cd webpro-saas-platform
+
+# Install dependencies
+npm install
+# or
+yarn
+# or
+pnpm install
+# or
+bun install
 
 First, run the development server:
 
