@@ -76,7 +76,26 @@ pnpm install
 # or
 bun install
 
-First, run the development server:
+🌐 Environment Variables
+Create a .env file in the root and configure the following variables:
+
+DATABASE_URL=your_neon_db_url
+CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
+CLERK_SECRET_KEY=your_clerk_secret_key
+NEXT_PUBLIC_CLERK_FRONTEND_API=your_clerk_frontend_api
+STRIPE_SECRET_KEY=your_stripe_secret_key
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=your_stripe_publishable_key
+STRIPE_WEBHOOK_SECRET=your_stripe_webhook_secret
+
+Then run:
+
+npx prisma generate
+npx prisma db push
+```
+
+
+
+### Run the development server:
 
 ```bash
 npm run dev
@@ -101,5 +120,11 @@ To learn more about Next.js, take a look at the following resources:
 - [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
 - [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 👨‍💻 Author
+Ajay Thakare
+Computer Science Student & Full-Stack Developer
+🔗 LinkedIn
+📧 thakareajay6@gmail.com
+
+
 
