@@ -22,7 +22,7 @@
 
 | Category        | Technology             |
 |----------------|------------------------|
-| Frontend       | Next.js 14 (App Router), TypeScript |
+| Frontend       | Next.js 15, TypeScript |
 | Styling        | Tailwind CSS, ShadCN UI |
 | Backend        | Prisma ORM, API Routes |
 | Database       | Neon (PostgreSQL)      |
